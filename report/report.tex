@@ -27,7 +27,7 @@ One of the most widely used system for secure data transmission is the RSA schem
 
 Nevertheless, this problem can be solved in polynomial time on a quantum computer, using Shor's algorithm. A large enough quantum computer would therefore be able to break the RSA encryption scheme.
 
-We will define the behavior of a quantum computer using two quantum computational models, and delve into quantum complexity theory, the study of complexity classes of problems solved using these quantum models. We will end by describing Shor's algorithm, to understand the gain of a quantum-based model for computing.
+We will define the behavior of a quantum computer using two quantum computational models, and delve into quantum complexity theory, the study of complexity classes of problems solved using these quantum models. We will end by describing the Deutsch-Jozsa algorithm, to prove that a quantum computer can be exponentially faster than a deterministic classical computer.
 
 \tableofcontents
 
@@ -39,24 +39,44 @@ A classical computer uses the \emph{bit} as a basic unit, a system which can be 
 To study the complexity of different problems with a quantum point of view, we need a model for a quantum computer. Much like classical computers, two approaches exists: the representation of a quantum computer as a circuit, using quantum logic gates, and an abstract model called quantum Turing machine, by analogy with the classical Turing machine.
 
 \subsection{Quantum Logic Gates}
-A quantum gate takes into input $n$ qubits, and intuitively modifies the probability of each qubit to be in each state. More precisely, it changes the position of the qubit on the surface of the Bloch sphere. Therefore, quantum gates are often represented as unitary matrices of size $2^n \times 2^n$, i.e. elements of $U(2^n, \mathbb{C})$. We will present basic quantum gates.
+A quantum gate takes into input $n$ qubits, and intuitively modifies the probability of each qubit to be in each state. More precisely, it changes the position of the qubit on the surface of the Bloch sphere. Therefore, quantum gates are often represented as unitary matrices of size $2^n \times 2^n$, i.e. elements of $U(2^n, \mathbb{C})$. We will present a few basic quantum gates.
 
 \subsection{Quantum Turing Machine}
 Another approach to model a quantum computer is to describe it as a generalized Turing machine. The set of states is replaced by a Hilbert space, and the transition function is replaced by a set of unitary matrices, similarly to the logic gates representation. 
 
 \section{Quantum Complexity Theory}
-\subsection{Relationship between classical and quantum complexity classes}
-\subsubsection{Simulating a quantum computer}
-\subsubsection{Efficiently simulating a classical computer}
+Similarly to the study of classical algorithms, we can regroup quantum problems in classes depending on their solvability by a quantum computational model under time and space constraints, such as time or space. 
 
-\subsection{The BQP class}
+\subsection{Quantum complexity classes}
+\subsubsection{The BQP class}
+An important class of problem is the BQP class; it is the equivalent of the BPP class for classical probabilistic computers.
+The BQP class is the set of problems which can be solved in polynomial time by a quantum Turing machine, with a bounded error. The formal definition often involves a maximum error of $\frac{1}{3}$ in one run, but any bound strictly lower than $\frac{1}{2}$ is sufficient, since multiple runs of the algorithm can be chained to reduce the error.
+
 \subsection{Query complexity}
 
-\section{An example of Quantum Algorithm: Shor's Algorithm}
-\subsection{Motivation and overview}
-\subsection{Classical part}
-\subsection{Quantum part}
-\subsubsection{Quantum Fourier Transform}
+\subsection{Relationship with the Church-Turing Thesis}
+Showing that $BPP \varsubsetneq BQP$ would imply that quantum computers are in certain cases more efficient than classical computers. This would therefore invalidate the complexity-theoretic Church–Turing thesis. A quantum-extended version of the thesis has therefore been proposed. \cite{quantum-applied}
+
+\section{The Deutsch-Jozsa Algorithm}
+The Deutsch-Jozsa is an important quantum algorithm, not because of any practical use, but because it shows the interest of a quantum computer over a classical computer. The existence of the problem and algorithm proves that there is an \emph{oracle separation} between the EQP and P class: this is a black box problem that can be solved in polynomial time using a quantum computer, but that cannot be solved by a classical computer in polynomial time.
+
+\subsection{Problem description}
+Let's consider a function $f$ operating on $n$ bits or qubits. That is:
+\begin{equation*}
+    f : \{ 0, 1 \}^n \to \{ 0, 1 \}
+\end{equation*}
+This function is assumed to have a specific property: it is either \emph{constant} or \emph{balanced}:
+\begin{equation*}
+    |f^{-1}(\{0\})| = n \lor |f^{-1}(\{1\})| = n \lor \left(|f^{-1}(\{0\})| = |f^{-1}(\{1\})| = \frac{n}{2}\right)
+\end{equation*}
+This means that either the function produces only \texttt{0}, or it produces only \texttt{1}, or it produces exactly half of \texttt{0} and half of \texttt{1}.
+
+The $f$ function behaves like a black box, or an \emph{oracle}: it is able to output the outcome of $f(x)$ is an single operation for any $x$. The computer is asked to determine whether the function is constant or balanced.
+
+\subsection{Classical solution}
+A deterministic computer needs in the worst case to mesure more than half the $2^n$ possible outcomes for $f$; the best time complexity is therefore exponential. Nevertheless, this problem can be solved efficiently on a probabilistic computer with a high probability.
+
+\subsection{Quantum algorithm}
 
 \section*{Conclusion}
 \addcontentsline{toc}{section}{Conclusion}
