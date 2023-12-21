@@ -175,6 +175,17 @@ meaning that a qubit starting in a \emph{pure} state ($\ket{0}$ or $\ket{1}$) is
 If we consider the circuit \ref{fig:basic-circuit} on the left, the probability to measure $\ket{0}$ is exactly $\frac{1}{2}$. (Note that this is possibly the only method to have true random numbers.) If we were to modify the circuit to add an $X$ gate between the Hadamard gate and the measuring "gate", the outputs probabilities would not change. 
 
 \subsubsection{The \texorpdfstring{$Z$}{Z} gate}
+Once again, the $Z$ gate is a gate without classical equivalent; its action is simply to leave the $\ket{0}$ component untouched, and to multiply the $\ket{1}$ component by $-1$:
+\begin{equation*}
+    Z : \alpha\ket{0} + \beta\ket{1} \mapsto \alpha\ket{0} - \beta\ket{1}
+\end{equation*}
+Or, written in matrix form:
+\begin{equation*}
+    Z \cong \begin{pmatrix}
+        1&0\\
+        0&-1
+    \end{pmatrix}
+\end{equation*}
 
 \subsection{Quantum Turing Machine}
 Another approach to model a quantum computer is to describe it as a generalized Turing machine. The set of states is replaced by a Hilbert space, and the transition function is replaced by a set of unitary matrices, similarly to the logic gates representation. 
