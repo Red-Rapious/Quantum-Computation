@@ -13,6 +13,8 @@
 
 \usepackage{hyperref}
 
+\newtheorem{definition}{Definition}
+
 \makeatletter
 
 \title{\vspace{-3ex} \textbf{Quantum Computation}}
@@ -49,13 +51,34 @@ Similarly to the study of classical algorithms, we can regroup quantum problems 
 
 \subsection{Quantum complexity classes}
 \subsubsection{The BQP class}
-An important class of problem is the BQP class; it is the equivalent of the BPP class for classical probabilistic computers.
-The BQP class is the set of problems which can be solved in polynomial time by a quantum Turing machine, with a bounded error. The formal definition often involves a maximum error of $\frac{1}{3}$ in one run, but any bound strictly lower than $\frac{1}{2}$ is sufficient, since multiple runs of the algorithm can be chained to reduce the error.
+An important class of problem is the BQP class; it is the equivalent of the BPP class (Bounded-error, Probabilistic Polynomial time) for classical probabilistic computers.
 
-\subsection{Query complexity}
+\begin{definition}[BQP] 
+    The BQP class is the set of problems which can be solved in polynomial time by a quantum Turing machine, with an error of at most $\frac{1}{3}$. 
+\end{definition}
+The formal definition often involves a maximum error of $\frac{1}{3}$ in one run, but any bound strictly lower than $\frac{1}{2}$ is sufficient, since multiple runs of the algorithm can be chained to reduce the error.
+
+\subsubsection{A BQP-complete problem}
+\begin{definition}[APPROX-QCIRCUIT-PROB problem]
+    
+\end{definition}
+
+\subsubsection{Relationship to classical complexity classes}
+
 
 \subsection{Relationship with the Church-Turing Thesis}
-Showing that $BPP \varsubsetneq BQP$ would imply that quantum computers are in certain cases more efficient than classical computers. This would therefore invalidate the complexity-theoretic Church–Turing thesis. A quantum-extended version of the thesis has therefore been proposed. \cite{quantum-applied}
+\begin{definition}[Church-Turing Thesis]
+    A function on the natural numbers can be calculated by an effective method if and only if it is computable by a Turing machine.
+\end{definition}
+
+Any quantum algorithm can be simulated either by hand, or on a classical computer, even if the resulting complexity of the computation is changed. Formally, it can be shown that a quantum Turing machine can be simulated on a Universal Turing Machine. Therefore, the existence of quantum computers do not disprove the Church-Turing thesis.
+
+Nevertheless, the Church-Turing thesis do not state anything about the time complexity of the simulation. This lead to the 
+
+\begin{definition}[Extended Church-Turing Thesis]
+    A probabilistic Turing machine can efficiently simulate any realistic model of computation.
+\end{definition}
+Showing that $BPP \varsubsetneq BQP$ would imply that quantum computers are in certain cases more efficient than classical computers. This would therefore invalidate the extended Church–Turing thesis. A quantum-extended version of the thesis has therefore been proposed. \cite{quantum-applied}
 
 \section{The Deutsch-Jozsa Algorithm}
 The Deutsch-Jozsa is an important quantum algorithm, not because of any practical use, but because it shows the interest of a quantum computer over a classical computer. The existence of the problem and algorithm proves that there is an \emph{oracle separation} between the EQP and P class: this is a black box problem that can be solved in polynomial time using a quantum computer, but that cannot be solved by a classical computer in polynomial time.
