@@ -1,5 +1,5 @@
 \documentclass[12pt,a4paper]{article}
-\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage[a4paper,margin=2.05cm]{geometry}
 
 \usepackage{cmap}
 \usepackage[T1]{fontenc}
@@ -13,11 +13,14 @@
 \usepackage{amsthm}
 
 \usepackage{mathtools}
+\usepackage{wrapfig}
+\usepackage{lipsum}
 
 \usepackage{hyperref}
 
 \newtheorem{definition}{Definition}
 \newtheorem*{example}{Example}
+\newtheorem*{theorem}{Theorem}
 
 \DeclarePairedDelimiter\ket{\lvert}{\rangle}
 
@@ -71,7 +74,7 @@ since the qubit must be mesured in one on the two states.
     \begin{equation*}
         \ket{\textnormal{exam}} = \sqrt{p} \: \ket{\textnormal{pass}}+\sqrt{1-p} \: \ket{\textnormal{fail}}
     \end{equation*}
-    We can verify the normalization condition:
+    We can verify that the normalization condition is respected:
     \begin{equation*}
         (\sqrt{p})^2 + (\sqrt{1-p})^2 = 1
     \end{equation*}
@@ -93,14 +96,85 @@ Furthermore, we can model an action that changes the qubit's state simply by a m
 
 Obviously, we want $\ket{\Psi'}$ to respect the normalization condition for every qubit $\Psi$. This requires $U$ to be a unitary matrix, that is $UU^\dagger = I_2$, where $U^\dagger$ is the conjugate transpose of $U$\footnote{The conjugate transpose is usually noted $U^\star$, but I guess that quantum physicists prefer the medieval vibe of $\dagger$.}.
 
-\subsection{The Bloch sphere}
+\subsubsection{The Bloch sphere}
+When dealing with simple amplitudes, like $\alpha, \beta\in [0, 1]$, the state of a qubit can be simply represented using a 1-dimensionnal line:
+% TODO: insert picture
 
+Nevertheless, visualizing the state of a qubit - and the transformations of this state as physical transformations are applied to it - can be challenging. A common way to visualize a qubit is the Bloch sphere.
+
+\setlength{\columnsep}{0pt}
+\begin{wrapfigure}{r}{0.4\textwidth}
+    \centering
+    \includegraphics*{bloch-sphere}
+    \caption{A Bloch sphere}
+\end{wrapfigure}
+
+Since $\|\ket{\Psi}\|_2=1$, we can uniquely\footnote{Except when $\ket{\Psi}=\ket{0}$ or $\ket{\Psi}=\ket{1}$, since $\phi$ can take any value.} write $\ket{\Psi}$ as:
+\begin{equation*}
+    \ket{\Psi}=\cos(\theta/2)\:\ket{0} + e^{i\phi}\sin(\theta/2)\: \ket{1}
+\end{equation*}
+where $0\leq\theta\leq\pi$ and $0\leq\phi<2\pi$. This parametrization of $\ket{\Psi}$ corresponds to spherical coordinates, and uniquely define a vector $\vec{a}\in\mathbb{R}^3$:
+\begin{equation*}
+    \vec{a}=\begin{pmatrix}\sin\theta\cos\phi\\\sin\theta\sin\phi\\\cos\theta\end{pmatrix}
+\end{equation*}
+
+The mesure of the qubit $\ket{\Psi}$ can be seen as the projection of this vector on either $\ket{0}$ or $\ket{1}$, i.e. on $\vec{z}$ or $-\vec{z}$. The closer the point on the sphere is to a pole, the higher the probability to be mesured in this state. When the vector is pointing directly to the top, the probability to be mesured in $\ket{0}$ is $1$; when pointing directly down, the probability is $0$, and when the vector is orthogonal to $\vec{z}$, the probability is $\frac{1}{2}$.
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics*[scale=0.5]{bloch-examples.png}
+    \caption{Examples of vectors on the Bloch sphere for some simple states}
+\end{figure}
 
 \section{Quantum Computational Models}
-To study the complexity of different problems with a quantum point of view, we need a model for a quantum computer. Much like classical computers, two approaches exists: the representation of a quantum computer as a circuit, using quantum logic gates, and an abstract model called quantum Turing machine, by analogy with the classical Turing machine.
+To study the complexity of different problems with a quantum point of view, we need a model for a quantum computer. Much like classical computers, two approaches coexist: the representation of a quantum computer as a circuit, using quantum logic gates, and an abstract model called quantum Turing machine, by analogy with the classical Turing machine.
 
 \subsection{Quantum Logic Gates}
 A quantum gate takes into input $n$ qubits, and intuitively modifies the probability of each qubit to be in each state. More precisely, it changes the position of the qubit on the surface of the Bloch sphere. Therefore, quantum gates are often represented as unitary matrices of size $2^n \times 2^n$, i.e. elements of $U(2^n, \mathbb{C})$. We will present a few basic quantum gates.
+
+A quantum algorithm uses a sequence of theses gates, which modify the states of the input qubits. The final result of the algorithm is obtained by measuring the states of the output qubits. 
+
+\subsubsection{The \texorpdfstring{$X$}{X} Gate}
+The $X$ gate is the quantum equivalent of the classical $NOT$ gate. It takes one qubit as an input, and permutes its amplitudes. Formally:
+\begin{equation*}
+    X : \alpha\ket{0} + \beta\ket{1} \mapsto \beta\ket{0} + \alpha\ket{1}
+\end{equation*}
+The unitary matrix associated to $X$ is:
+\begin{equation*}
+    X \cong \begin{pmatrix}
+        0&1\\
+        1&0
+    \end{pmatrix}
+\end{equation*}
+
+\subsubsection{Hadamard Gate}
+The Hadamard gate does not have a classical equivalent; one of its most basic use is to generate superposition on a qubit. The unitary matrix associated to the Hadamard gate, written $H$, is the following:
+\begin{equation*}
+    H \cong \frac{1}{\sqrt{2}}
+    \begin{pmatrix}
+        1&1\\
+        1&-1
+    \end{pmatrix}
+\end{equation*}
+An immediate result is that:
+\begin{equation*}
+    \begin{cases}
+        H\ket{0} = \frac{1}{\sqrt{2}}(\ket{0}+\ket{1}) \\
+        H\ket{1} = \frac{1}{\sqrt{2}}(\ket{0}-\ket{1})
+    \end{cases}
+\end{equation*}
+meaning that a qubit starting in a \emph{pure} state ($\ket{0}$ or $\ket{1}$) is transformed into a qubit in a balanced superposition of $\ket{0}$ and $\ket{1}$.
+
+\begin{wrapfigure}[7]{l}{0.5\textwidth}
+    \label{fig:basic-circuit}
+    \centering
+    \includegraphics*[scale=0.3]{basic-circuit.png}
+    \caption{A basic circuit}
+\end{wrapfigure}
+
+If we consider the circuit \ref{fig:basic-circuit} on the left, the probability to measure $\ket{0}$ is exactly $\frac{1}{2}$. (Note that this is possibly the only method to have true random numbers.) If we were to modify the circuit to add an $X$ gate between the Hadamard gate and the measuring "gate", the outputs probabilities would not change. 
+
+\subsubsection{The \texorpdfstring{$Z$}{Z} gate}
 
 \subsection{Quantum Turing Machine}
 Another approach to model a quantum computer is to describe it as a generalized Turing machine. The set of states is replaced by a Hilbert space, and the transition function is replaced by a set of unitary matrices, similarly to the logic gates representation. 
