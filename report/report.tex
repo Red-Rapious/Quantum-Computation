@@ -1,4 +1,4 @@
-\documentclass[12pt,a4paper]{article} 
+\documentclass[12pt,a4paper]{article}
 \usepackage[a4paper,margin=2cm]{geometry}
 
 \usepackage{cmap}
@@ -10,10 +10,16 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
+\usepackage{amsthm}
+
+\usepackage{mathtools}
 
 \usepackage{hyperref}
 
 \newtheorem{definition}{Definition}
+\newtheorem*{example}{Example}
+
+\DeclarePairedDelimiter\ket{\lvert}{\rangle}
 
 \makeatletter
 
@@ -33,9 +39,62 @@ We will define the behavior of a quantum computer using two quantum computationa
 
 \tableofcontents
 
-\section*{Introduction to Quantum Computers}
-\addcontentsline{toc}{section}{Introduction to Quantum Computers}
+\section{Introduction to Quantum Computers}
 A classical computer uses the \emph{bit} as a basic unit, a system which can be in exactly one of the two states \texttt{0} and \texttt{1}. Similarly, a quantum computer uses a basic unit called \emph{qubit}, which can be in a \emph{superposition} of two states. A qubit can be described as a linear combinaison of both states, each coefficient being related to the probability that the qubit is in the given state. This way, a qubit can store more information than a simple bit, by storing information for both states at a time.
+
+\subsection{Qubit representation}
+While representing the state of a classical bit is quite simple, manipulating qubits requires more advanced notation. 
+
+\subsubsection{Dirac notation}
+The state of a qubit is often represented using the Dirac notation, also known as the Bra-ket notation.%\cite{dirac-notation}.
+
+A qubit of state $\Psi$ is noted $\ket{\Psi}$, and is in a superposition of the two state $\ket{0}$ and $\ket{1}$. This superposition can be written as:
+\begin{equation*}
+    \ket{\Psi}=\alpha\ket{\Psi}+\beta\ket{\Psi}
+\end{equation*}
+where $\alpha, \beta\in \mathbb{C}$ are called the states amplitudes. 
+
+\begin{example}[Schrödinger's cat]
+    \begin{equation*}
+        \ket{\textnormal{Schrödinger's cat}} = \alpha\ket{\textnormal{dead}} + \beta\ket{\textnormal{alive}}
+    \end{equation*}
+\end{example}
+
+The probability to measure the qubit in the state $\ket{0}$ (and respectively $\ket{1}$) is $|\alpha|^2$ (respectively $|\beta|^2$). This interpretation gives us a normalization condition:
+\begin{equation*}
+    |\alpha|^2+|\beta|^2=1
+\end{equation*}
+since the qubit must be mesured in one on the two states.
+
+\begin{example}[LFCC exam]
+    Assume that you have a probability $p\in[0, 1]$ of passing the next LFCC exam. Your result at the exam can be represented using one qubit in the following state:
+    \begin{equation*}
+        \ket{\textnormal{exam}} = \sqrt{p} \: \ket{\textnormal{pass}}+\sqrt{1-p} \: \ket{\textnormal{fail}}
+    \end{equation*}
+    We can verify the normalization condition:
+    \begin{equation*}
+        (\sqrt{p})^2 + (\sqrt{1-p})^2 = 1
+    \end{equation*}
+\end{example}
+
+\subsubsection{Vector representation}
+Writing qubits is nice, but we would like to be able to change their state too. The Dirac notation is not the most practical one when the possible states ($\ket{0}$ and $\ket{1}$) are explicit. Instead, we can use a vector representation:
+\begin{equation*}
+    \ket{\Psi} = \begin{pmatrix}\alpha\\\beta\end{pmatrix}
+\end{equation*}
+This notation allows us to use linear algebra tools to express physical conditions and changes. The normalization condition simply becomes:
+\begin{equation*}
+    \|\ket{\Psi}\|_2 = 1
+\end{equation*}
+Furthermore, we can model an action that changes the qubit's state simply by a matrix $U$. If a qubit of initial state $\ket{\Psi}$ goes through some quantum gate (more on this later) represented by $U$, the final state $\ket{\Psi'}$ would be:
+\begin{equation*}
+    \ket{\Psi'} = U\ket{\Psi}
+\end{equation*}
+
+Obviously, we want $\ket{\Psi'}$ to respect the normalization condition for every qubit $\Psi$. This requires $U$ to be a unitary matrix, that is $UU^\dagger = I_2$, where $U^\dagger$ is the conjugate transpose of $U$\footnote{The conjugate transpose is usually noted $U^\star$, but I guess that quantum physicists prefer the medieval vibe of $\dagger$.}.
+
+\subsection{The Bloch sphere}
+
 
 \section{Quantum Computational Models}
 To study the complexity of different problems with a quantum point of view, we need a model for a quantum computer. Much like classical computers, two approaches exists: the representation of a quantum computer as a circuit, using quantum logic gates, and an abstract model called quantum Turing machine, by analogy with the classical Turing machine.
@@ -73,12 +132,11 @@ The formal definition often involves a maximum error of $\frac{1}{3}$ in one run
 
 Any quantum algorithm can be simulated either by hand, or on a classical computer, even if the resulting complexity of the computation is changed. Formally, it can be shown that a quantum Turing machine can be simulated on a Universal Turing Machine. Therefore, the existence of quantum computers do not disprove the Church-Turing thesis.
 
-Nevertheless, the Church-Turing thesis do not state anything about the time complexity of the simulation. This lead to the 
-
+Nevertheless, the Church-Turing thesis do not state anything about the time complexity of the simulation. This lead to the following extension of the Church-Turing Thesis:
 \begin{definition}[Extended Church-Turing Thesis]
     A probabilistic Turing machine can efficiently simulate any realistic model of computation.
 \end{definition}
-Showing that $BPP \varsubsetneq BQP$ would imply that quantum computers are in certain cases more efficient than classical computers. This would therefore invalidate the extended Church–Turing thesis. A quantum-extended version of the thesis has therefore been proposed. \cite{quantum-applied}
+Showing that $BPP \varsubsetneq BQP$ would imply that quantum computers are in certain cases more efficient than classical computers. This would therefore invalidate the extended Church–Turing thesis. A quantum-extended version of the thesis has therefore been proposed. %\cite{quantum-applied}
 
 \section{The Deutsch-Jozsa Algorithm}
 The Deutsch-Jozsa is an important quantum algorithm, not because of any practical use, but because it shows the interest of a quantum computer over a classical computer. The existence of the problem and algorithm proves that there is an \emph{oracle separation} between the EQP and P class: this is a black box problem that can be solved in polynomial time using a quantum computer, but that cannot be solved by a classical computer in polynomial time.
@@ -104,8 +162,8 @@ A deterministic computer needs in the worst case to mesure more than half the $2
 \section*{Conclusion}
 \addcontentsline{toc}{section}{Conclusion}
 
-\nocite{*}
-\bibliographystyle{plain}
-\bibliography{report}
+%\nocite{*}
+%\bibliographystyle{plain}
+%\bibliography{report}
 
 \end{document}
