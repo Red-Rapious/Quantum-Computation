@@ -18,9 +18,10 @@
 
 \usepackage{hyperref}
 
-\newtheorem{definition}{Definition}
-\newtheorem*{example}{Example}
 \newtheorem*{theorem}{Theorem}
+\theoremstyle{definition}
+\newtheorem*{definition}{Definition}
+\newtheorem*{example}{Example}
 
 \DeclarePairedDelimiter\ket{\lvert}{\rangle}
 
@@ -178,7 +179,7 @@ An immediate result is that:
 \end{equation*}
 meaning that a qubit starting in a \emph{pure} state ($\ket{0}$ or $\ket{1}$) is transformed into a qubit in a balanced superposition of $\ket{0}$ and $\ket{1}$.
 
-\begin{wrapfigure}[8]{l}{0.5\textwidth}
+\begin{wrapfigure}[9]{l}{0.5\textwidth}
     \label{fig:basic-circuit}
     \centering
     \includegraphics*[scale=0.3]{basic-circuit.png}
@@ -189,10 +190,73 @@ If we consider the circuit \ref{fig:basic-circuit} on the left, the probability
 
 Note that like every quantum gate represented by an unitary matrix, and unlike many classical gates, the Hadamard gate is reversible. This might seem counter-intuitive since the previous example suggests that we "lost" the information on the qubit. 
 
+%\subsection{Introduction to Quantum Languages}%\cite{moore1997quantum}}
 \subsection{Quantum Finite Automaton}
+\subsubsection{Quantum Languages}
+Let $\Sigma$ be an alphabet, and $L\subseteq \Sigma^\star$ a language over the alphabet $\Sigma$. Another way to see this language, apart from a subset of $\Sigma^\star$, is using its characteristic function $\chi_L$:
+\begin{equation*}
+    \chi_L(w) = \begin{cases*}
+        1 & if $w\in L$\\
+        0 & otherwise
+    \end{cases*}
+\end{equation*}
 
+By analogy to this, we can define a \emph{quantum language} as a function mapping words to probabilities.
+\begin{definition}[Quantum language]
+    A quantum language over the alphabet $\Sigma$ is a function $f$ such as:
+    \begin{equation*}
+        f : \Sigma^\star \to [0, 1]
+    \end{equation*}
+    $f$ is a classical alphabet if $f(\Sigma^\star) \subseteq \{0, 1\}$.
+\end{definition}
 
-%Note that there is no quantum analog to the push-down automaton. This is due to the no-cloning theorem: there is no way to make a copy of the current state of the machine, push it onto a stack for later reference, and then return to it.
+\subsubsection{Definition of QFAs and QRLs}
+\begin{definition}[QFA]
+    A \emph{Quantum Finite Automaton} $Q=(H, s_{\textnormal{init}}, H_{\textnormal{accept}}, P_{\textnormal{accept}}, \Sigma, \delta)$ consists of:
+    \begin{itemize}
+        \item a Hilbert space $H$\footnote{Recall that a Hilbert space is an inner product space complete for the distance induced by the inner product} of dimension $n$. (This will generalize the set $Q$ of states of a classical DFA.)
+        \item an initial normalized vector $s_{\textnormal{init}}\in H$ (i.e. $\|s_{\textnormal{init}}\|^2=1$). (This is the equivalent of the initial state in a DFA.)
+        \item a subspace $H_{\textnormal{accept}} \subseteq H$, and an operator $P_{\textnormal{accept}}$ which projects onto it
+        \item an alphabet $\Sigma$
+        \item a function $\delta : \Sigma \to U_n(\mathbb{C})$\footnote{$U_n(\mathbb{C})$ is the set of unitary matrices of size $n$}, mapping each letter of $a\in\Sigma$ to an unitary matrix $U_a\in\Sigma$.
+    \end{itemize}
+    
+    We will also write $\delta^\star(w=w_1\cdots w_{|w|}) = \delta(w_{|w|})\cdots \delta(w_1) = U_{w_{|w|}}\cdots U_{w_1}$. Finally, the language recognized by $Q$ is the following function:
+    \begin{equation*}
+        f_Q : w \mapsto \|P_{\textnormal{accept}}\delta^\star(w)s_{\textnormal{init}}\|^2
+    \end{equation*}
+    (It is convenient to see the vector and matrix multiplications being computed from right to left.)
+\end{definition}
+
+Intuitively, we start from the $s_{\textnormal{init}}$ vector (or state), and we follow $w$ by multiplying the current vector by the matrix associated to the current letter of the input word. When the word is finished, we project the current vector (which remains of norm $1$) on the space $H_{\textnormal{accept}}$ using the operator $P_{\textnormal{accept}}$. If $\delta^\star(w)s_{\textnormal{init}}\in H_{\textnormal{accept}}$, the $P_{\textnormal{accept}}$ will left $\delta^\star(w)s_{\textnormal{init}}$ untouched, and the output probability will be $1$; otherwise, the output probability decreases as the norm projection of $\delta^\star(w)s_{\textnormal{init}}$ decreases.
+
+The end of the process corresponds to a measurement, and $f_Q(w)$ can be interpreted as the probability that this measurement has an acceptable outcome. 
+
+\begin{definition}[QRL]
+    A \emph{Quantum Regular Language} is a quantum language recognized by a QFA.
+\end{definition}
+
+\subsubsection{A few properties of QRLs}
+\begin{theorem}[Quantum Pumping Lemma]
+    If $f$ is a QRL, then for any word $w\in\Sigma^\star$ and any $\varepsilon > 0$, there is a $k\in \mathbb{N}^\star$ such that $\|f(uw^kv) - f(uv)\| < \varepsilon$ for any words $u, v$. Moreover, if $f$'s automaton is $n$-dimensional, there is a constant $c$ such that $k < (c\varepsilon)^{-n}$.
+\end{theorem}
+
+\subsection{Quantum context-free languages}
+\begin{definition}[QPDA]
+    A \emph{Quantum Push-Down Automata}
+\end{definition}
+
+\begin{definition}[Quantum Grammar\footnote{\url{https://xkcd.com/1090/}}]
+    
+\end{definition}
+
+\begin{definition}[Quantum Context-Free Grammar]
+    
+\end{definition}
+
+\begin{definition}[Quantum Context-Free Grammar]
+    
+\end{definition}
 
 \subsection{Quantum Turing Machine}
 Another approach to model a quantum computer is to describe it as a generalized Turing machine. The set of states is replaced by a Hilbert space, and the transition function is replaced by a set of unitary matrices, similarly to the logic gates representation. 
@@ -224,10 +288,11 @@ The formal definition often involves a maximum error of $\frac{1}{3}$ in one run
 
 Any quantum algorithm can be simulated either by hand, or on a classical computer, even if the resulting complexity of the computation is changed. Formally, it can be shown that a quantum Turing machine can be simulated on a Universal Turing Machine. Therefore, the existence of quantum computers do not disprove the Church-Turing thesis.
 
-Nevertheless, the Church-Turing thesis do not state anything about the time complexity of the simulation. This lead to the following extension of the Church-Turing Thesis:
+Nevertheless, the Church-Turing thesis do not state anything about the time complexity of the simulation. Historically, this lead to the following extension of the Church-Turing Thesis:
 \begin{definition}[Extended Church-Turing Thesis]
     A probabilistic Turing machine can efficiently simulate any realistic model of computation.
 \end{definition}
+
 Showing that $BPP \varsubsetneq BQP$ would imply that quantum computers are in certain cases more efficient than classical computers. This would therefore invalidate the extended Church–Turing thesis. A quantum-extended version of the thesis has therefore been proposed. %\cite{quantum-applied}
 
 \section{The Deutsch-Jozsa Algorithm}
