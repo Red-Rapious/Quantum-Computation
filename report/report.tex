@@ -96,7 +96,7 @@ Furthermore, we can model an action that changes the qubit's state simply by a m
 
 Obviously, we want $\ket{\Psi'}$ to respect the normalization condition for every qubit $\Psi$. This requires $U$ to be a unitary matrix, that is $UU^\dagger = I_2$, where $U^\dagger$ is the conjugate transpose of $U$\footnote{The conjugate transpose is usually noted $U^\star$, but I guess that quantum physicists prefer the medieval vibe of $\dagger$.}.
 
-\subsubsection{The Bloch sphere}
+\subsection{The Bloch sphere}
 When dealing with simple amplitudes, like $\alpha, \beta\in [0, 1]$, the state of a qubit can be simply represented using a 1-dimensionnal line:
 % TODO: insert picture
 
@@ -129,10 +129,10 @@ The mesure of the qubit $\ket{\Psi}$ can be seen as the projection of this vecto
 \section{Quantum Computational Models}
 To study the complexity of different problems with a quantum point of view, we need a model for a quantum computer. Much like classical computers, two approaches coexist: the representation of a quantum computer as a circuit, using quantum logic gates, and an abstract model called quantum Turing machine, by analogy with the classical Turing machine.
 
-\subsection{Quantum Logic Gates}
-A quantum gate takes into input $n$ qubits, and intuitively modifies the probability of each qubit to be in each state. More precisely, it changes the position of the qubit on the surface of the Bloch sphere. Therefore, quantum gates are often represented as unitary matrices of size $2^n \times 2^n$, i.e. elements of $U(2^n, \mathbb{C})$. We will present a few basic quantum gates.
+\subsection{Quantum Circuits}
+A \emph{quantum circuit} is the counterpart of the classical circuit; from an abstract point of view, it is composed of a multiple qubits, a sequence of \emph{quantum gates}, and special gates called \emph{measurements}, the quantum phenomenon which projects the qubit in one pure state. Each line of the circuit represents one qubit, and the $x$-axis represents time. 
 
-A quantum algorithm uses a sequence of theses gates, which modify the states of the input qubits. The final result of the algorithm is obtained by measuring the states of the output qubits. 
+A quantum gate takes into input $n$ qubits, and modifies the probability of each qubit to be in each state. This can be seen visualy: the quantum gate changes the position of the qubit on the surface of the Bloch sphere. Therefore, quantum gates are often represented as unitary matrices of size $2^n \times 2^n$, i.e. elements of $U(2^n, \mathbb{C})$. We will now present a few basic quantum gates.
 
 \subsubsection{The \texorpdfstring{$X$}{X} Gate}
 The $X$ gate is the quantum equivalent of the classical $NOT$ gate. It takes one qubit as an input, and permutes its amplitudes. Formally:
@@ -147,8 +147,21 @@ The unitary matrix associated to $X$ is:
     \end{pmatrix}
 \end{equation*}
 
+\subsubsection{The \texorpdfstring{$Z$}{Z} gate}
+The $Z$ gate does not have a classical equivalent; its action over one qubit is simply to leave the $\ket{0}$ component untouched, and to multiply the $\ket{1}$ component by $-1$:
+\begin{equation*}
+    Z : \alpha\ket{0} + \beta\ket{1} \mapsto \alpha\ket{0} - \beta\ket{1}
+\end{equation*}
+Or, written in matrix form:
+\begin{equation*}
+    Z \cong \begin{pmatrix}
+        1&0\\
+        0&-1
+    \end{pmatrix}
+\end{equation*}
+
 \subsubsection{Hadamard Gate}
-The Hadamard gate does not have a classical equivalent; one of its most basic use is to generate superposition on a qubit. The unitary matrix associated to the Hadamard gate, written $H$, is the following:
+The Hadamard gate is a one-qubit gate without classical equivalent; one of its most basic use is to generate superposition on a qubit. The unitary matrix associated to the Hadamard gate, written $H$, is the following:
 \begin{equation*}
     H \cong \frac{1}{\sqrt{2}}
     \begin{pmatrix}
@@ -165,7 +178,7 @@ An immediate result is that:
 \end{equation*}
 meaning that a qubit starting in a \emph{pure} state ($\ket{0}$ or $\ket{1}$) is transformed into a qubit in a balanced superposition of $\ket{0}$ and $\ket{1}$.
 
-\begin{wrapfigure}[7]{l}{0.5\textwidth}
+\begin{wrapfigure}[8]{l}{0.5\textwidth}
     \label{fig:basic-circuit}
     \centering
     \includegraphics*[scale=0.3]{basic-circuit.png}
@@ -174,24 +187,18 @@ meaning that a qubit starting in a \emph{pure} state ($\ket{0}$ or $\ket{1}$) is
 
 If we consider the circuit \ref{fig:basic-circuit} on the left, the probability to measure $\ket{0}$ is exactly $\frac{1}{2}$. (Note that this is possibly the only method to have true random numbers.) If we were to modify the circuit to add an $X$ gate between the Hadamard gate and the measuring "gate", the outputs probabilities would not change. 
 
-\subsubsection{The \texorpdfstring{$Z$}{Z} gate}
-Once again, the $Z$ gate is a gate without classical equivalent; its action is simply to leave the $\ket{0}$ component untouched, and to multiply the $\ket{1}$ component by $-1$:
-\begin{equation*}
-    Z : \alpha\ket{0} + \beta\ket{1} \mapsto \alpha\ket{0} - \beta\ket{1}
-\end{equation*}
-Or, written in matrix form:
-\begin{equation*}
-    Z \cong \begin{pmatrix}
-        1&0\\
-        0&-1
-    \end{pmatrix}
-\end{equation*}
+Note that like every quantum gate represented by an unitary matrix, and unlike many classical gates, the Hadamard gate is reversible. This might seem counter-intuitive since the previous example suggests that we "lost" the information on the qubit. 
+
+\subsection{Quantum Finite Automaton}
+
+
+%Note that there is no quantum analog to the push-down automaton. This is due to the no-cloning theorem: there is no way to make a copy of the current state of the machine, push it onto a stack for later reference, and then return to it.
 
 \subsection{Quantum Turing Machine}
 Another approach to model a quantum computer is to describe it as a generalized Turing machine. The set of states is replaced by a Hilbert space, and the transition function is replaced by a set of unitary matrices, similarly to the logic gates representation. 
 
 \section{Quantum Complexity Theory}
-Similarly to the study of classical algorithms, we can regroup quantum problems in classes depending on their solvability by a quantum computational model under time and space constraints, such as time or space. 
+Similarly to the study of classical algorithms, we can regroup quantum problems in classes depending on their solvability by a quantum computational model under time and space constraints. 
 
 \subsection{Quantum complexity classes}
 \subsubsection{The BQP class}
