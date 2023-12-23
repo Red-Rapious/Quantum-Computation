@@ -1,5 +1,5 @@
 \documentclass[12pt,a4paper]{article}
-\usepackage[a4paper,margin=2.05cm]{geometry}
+\usepackage[a4paper,margin=2cm]{geometry}
 
 \usepackage{cmap}
 \usepackage[T1]{fontenc}
@@ -14,7 +14,7 @@
 
 \usepackage{mathtools}
 \usepackage{wrapfig}
-\usepackage{lipsum}
+\usepackage{enumitem}
 
 \usepackage{hyperref}
 
@@ -27,7 +27,7 @@
 
 \makeatletter
 
-\title{\vspace{-3ex} \textbf{Quantum Computation}}
+\title{\vspace{-5ex} \textbf{Quantum Computation}}
 \author{Antoine Groudiev}
 \date{\vspace{-1ex}\today}
 \markright{Antoine Groudiev}{}
@@ -46,10 +46,10 @@ We will define the behavior of a quantum computer using two quantum computationa
 \section{Introduction to Quantum Computers}
 A classical computer uses the \emph{bit} as a basic unit, a system which can be in exactly one of the two states \texttt{0} and \texttt{1}. Similarly, a quantum computer uses a basic unit called \emph{qubit}, which can be in a \emph{superposition} of two states. A qubit can be described as a linear combinaison of both states, each coefficient being related to the probability that the qubit is in the given state. This way, a qubit can store more information than a simple bit, by storing information for both states at a time.
 
-\subsection{Qubit representation}
-While representing the state of a classical bit is quite simple, manipulating qubits requires more advanced notation. 
+%\subsection{Qubit representation}
 
-\subsubsection{Dirac notation}
+\subsection{Dirac notation}
+While representing the state of a classical bit is quite simple, manipulating qubits requires more advanced notation. 
 The state of a qubit is often represented using the Dirac notation, also known as the Bra-ket notation.%\cite{dirac-notation}.
 
 A qubit of state $\Psi$ is noted $\ket{\Psi}$, and is in a superposition of the two state $\ket{0}$ and $\ket{1}$. This superposition can be written as:
@@ -81,7 +81,7 @@ since the qubit must be mesured in one on the two states.
     \end{equation*}
 \end{example}
 
-\subsubsection{Vector representation}
+\subsection{Vector representation}
 Writing qubits is nice, but we would like to be able to change their state too. The Dirac notation is not the most practical one when the possible states ($\ket{0}$ and $\ket{1}$) are explicit. Instead, we can use a vector representation:
 \begin{equation*}
     \ket{\Psi} = \begin{pmatrix}\alpha\\\beta\end{pmatrix}
@@ -213,13 +213,13 @@ By analogy to this, we can define a \emph{quantum language} as a function mappin
 \subsubsection{Definition of QFAs and QRLs}
 \begin{definition}[QFA]
     A \emph{Quantum Finite Automaton} $Q=(H, s_{\textnormal{init}}, H_{\textnormal{accept}}, P_{\textnormal{accept}}, \Sigma, \delta)$ consists of:
-    \begin{itemize}
-        \item a Hilbert space $H$\footnote{Recall that a Hilbert space is an inner product space complete for the distance induced by the inner product} of dimension $n$. (This will generalize the set $Q$ of states of a classical DFA.)
+    \begin{enumerate}[label=--, noitemsep]
+        \item a Hilbert space\footnote{Recall that a Hilbert space is an inner product space complete for the distance induced by the inner product} $H$ of dimension $n$. (This will generalize the set $Q$ of states of a classical DFA.)
         \item an initial normalized vector $s_{\textnormal{init}}\in H$ (i.e. $\|s_{\textnormal{init}}\|^2=1$). (This is the equivalent of the initial state in a DFA.)
         \item a subspace $H_{\textnormal{accept}} \subseteq H$, and an operator $P_{\textnormal{accept}}$ which projects onto it
         \item an alphabet $\Sigma$
         \item a function $\delta : \Sigma \to U_n(\mathbb{C})$\footnote{$U_n(\mathbb{C})$ is the set of unitary matrices of size $n$}, mapping each letter of $a\in\Sigma$ to an unitary matrix $U_a\in\Sigma$.
-    \end{itemize}
+    \end{enumerate}
     
     We will also write $\delta^\star(w=w_1\cdots w_{|w|}) = \delta(w_{|w|})\cdots \delta(w_1) = U_{w_{|w|}}\cdots U_{w_1}$. Finally, the language recognized by $Q$ is the following function:
     \begin{equation*}
@@ -259,7 +259,19 @@ The end of the process corresponds to a measurement, and $f_Q(w)$ can be interpr
 \end{definition}
 
 \subsection{Quantum Turing Machine}
-Another approach to model a quantum computer is to describe it as a generalized Turing machine. The set of states is replaced by a Hilbert space, and the transition function is replaced by a set of unitary matrices, similarly to the logic gates representation. 
+Similarly to the classical case, the previous constructions can be generalized to gain expressivity. This leads to the following definition of a Quantum Turing Machine, the equivalent of a classical Turing machine, but using the previous constructions using Hilbert spaces and transition matrices:
+
+\begin{definition}[QTM] A \emph{Quantum Turing Machine} (or QTM) $M = (H, \Gamma, b, \Sigma, \delta, q_0, F)$ consists of:
+\begin{enumerate}[label=--, noitemsep]
+    \item a Hilbert space $H$ (replacing the classical set of states $Q$)
+    \item another Hilbert space $\Gamma$ (replacing the classical set of tape symbols)
+    \item a blank symbol $b\in \Gamma$
+    \item an alphabet of input and output symbols $\Sigma$
+\end{enumerate}
+    
+(Note: the previous definition of a QTM restricts the head movements to $\{L, R\}$, but a generalized version $\{L, N, R\}$ can similarly be introduced. While this does not matter in term of expressivity for a classical TM, there is a difference for QTMs.)
+
+\end{definition}
 
 \section{Quantum Complexity Theory}
 Similarly to the study of classical algorithms, we can regroup quantum problems in classes depending on their solvability by a quantum computational model under time and space constraints. 
@@ -269,7 +281,7 @@ Similarly to the study of classical algorithms, we can regroup quantum problems 
 An important class of problem is the BQP class; it is the equivalent of the BPP class (Bounded-error, Probabilistic Polynomial time) for classical probabilistic computers.
 
 \begin{definition}[BQP] 
-    The BQP class is the set of problems which can be solved in polynomial time by a quantum Turing machine, with an error of at most $\frac{1}{3}$. 
+    The \emph{Bounded-error Quantum Polynomial time} (BQP) class is the set of decision problems which can be solved in polynomial time by a quantum Turing machine, with an error of at most $\frac{1}{3}$. 
 \end{definition}
 The formal definition often involves a maximum error of $\frac{1}{3}$ in one run, but any bound strictly lower than $\frac{1}{2}$ is sufficient, since multiple runs of the algorithm can be chained to reduce the error.
 
