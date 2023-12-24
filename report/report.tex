@@ -15,13 +15,22 @@
 \usepackage{mathtools}
 \usepackage{wrapfig}
 \usepackage{enumitem}
+\usepackage[
+    backend=biber,
+    style=numeric
+]{biblatex}
 
 \usepackage{hyperref}
 
+\addbibresource{report.bib}
+
+\theoremstyle{plain}
 \newtheorem*{theorem}{Theorem}
+\newtheorem*{example}{Example}
+\newtheorem*{remark}{Remark}
 \theoremstyle{definition}
 \newtheorem*{definition}{Definition}
-\newtheorem*{example}{Example}
+\newtheorem*{thesis}{Thesis}
 
 \DeclarePairedDelimiter\ket{\lvert}{\rangle}
 
@@ -46,11 +55,9 @@ We will define the behavior of a quantum computer using two quantum computationa
 \section{Introduction to Quantum Computers}
 A classical computer uses the \emph{bit} as a basic unit, a system which can be in exactly one of the two states \texttt{0} and \texttt{1}. Similarly, a quantum computer uses a basic unit called \emph{qubit}, which can be in a \emph{superposition} of two states. A qubit can be described as a linear combinaison of both states, each coefficient being related to the probability that the qubit is in the given state. This way, a qubit can store more information than a simple bit, by storing information for both states at a time.
 
-%\subsection{Qubit representation}
-
 \subsection{Dirac notation}
 While representing the state of a classical bit is quite simple, manipulating qubits requires more advanced notation. 
-The state of a qubit is often represented using the Dirac notation, also known as the Bra-ket notation.%\cite{dirac-notation}.
+The state of a qubit is often represented using the Dirac notation, also known as the Bra-ket notation.\cite{dirac-notation}.
 
 A qubit of state $\Psi$ is noted $\ket{\Psi}$, and is in a superposition of the two state $\ket{0}$ and $\ket{1}$. This superposition can be written as:
 \begin{equation*}
@@ -121,7 +128,7 @@ where $0\leq\theta\leq\pi$ and $0\leq\phi<2\pi$. This parametrization of $\ket{\
 
 The mesure of the qubit $\ket{\Psi}$ can be seen as the projection of this vector on either $\ket{0}$ or $\ket{1}$, i.e. on $\vec{z}$ or $-\vec{z}$. The closer the point on the sphere is to a pole, the higher the probability to be mesured in this state. When the vector is pointing directly to the top, the probability to be mesured in $\ket{0}$ is $1$; when pointing directly down, the probability is $0$, and when the vector is orthogonal to $\vec{z}$, the probability is $\frac{1}{2}$.
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
     \centering
     \includegraphics*[scale=0.5]{bloch-examples.png}
     \caption{Examples of vectors on the Bloch sphere for some simple states}
@@ -190,7 +197,47 @@ If we consider the circuit \ref{fig:basic-circuit} on the left, the probability
 
 Note that like every quantum gate represented by an unitary matrix, and unlike many classical gates, the Hadamard gate is reversible. This might seem counter-intuitive since the previous example suggests that we "lost" the information on the qubit. 
 
-%\subsection{Introduction to Quantum Languages}%\cite{moore1997quantum}}
+\begin{remark}
+    Similarly to $XOR$, which can be constructed using only $AND$ and $OR$, the gates presented above are not "independent": it is possible\footnote{The proof is left as an exercise to the reader} to construct the $X$ gate using only $Z$ and $H$ gates.
+\end{remark}
+
+\subsubsection{Entanglement}
+The set of gates above lack expressivity, since they operate on a single qubit only. A pure quantum phenomenon is \emph{entanglement}, meaning that multiple qubits are correlated.
+
+\begin{example}[Bell's entanglement]
+    Consider two untangled qubits $\Psi$ and $\Phi$. Their default state is:
+    \begin{equation*}
+        \ket{\Psi\Phi} = \frac{1}{\sqrt{4}} \left(\ket{00}+\ket{01}+\ket{10}+\ket{11}\right)
+    \end{equation*}
+    meaning that each outcome of the universe $\{(0,0); (1,1); (1,0); (1,1)\}$ is equally probable. By entangling $\Psi$ and $\Phi$, it is possible to put them in the \emph{Bell state}, that is: 
+    \begin{equation*}
+        \ket{\Psi\Phi} = \frac{1}{\sqrt{2}} \left(\ket{00}+\ket{11}\right)
+    \end{equation*}
+    Where the only possible outcomes are $(0, 0)$ and $(1, 1)$. By measuring $\Psi$, we can deduct the "value" of $\Phi$, exactly as if it was measured, which breaks the quantum superposition phenomenon.
+\end{example}
+
+\subsubsection{CNOT gate}
+The \emph{Controlled NOT} gate, (or CNOT gate) is a fundamental gate, which allows to entangle qubits. It acts on two qubits, a \emph{control qubit}, and a \emph{target qubit}. Intuitively, if the control qubit is $\ket{0}$, the target qubit is unchanged; if the control qubit is $\ket{1}$, we apply an $X$ gate to the target qubit. Note that this description was expressed in the $(\ket{0}, \ket{1})$ basis, but that the control qubit is in general in a superposition of pure states.
+
+The action of the CNOT gate corresponds to the following matrix:
+\begin{equation*}
+    CNOT \cong \begin{pmatrix}
+        1&0&0&0\\
+        0&1&0&0\\
+        0&0&0&1\\
+        0&0&1&0
+    \end{pmatrix}
+\end{equation*}
+or, seen otherwise, the CNOT gate transforms
+\begin{equation*}
+    \alpha\ket{00}+\beta\ket{01}+\gamma\ket{10}+\delta\ket{11}
+\end{equation*}
+in
+\begin{equation*}
+    \alpha\ket{00}+\beta\ket{01}+\delta\ket{10}+\gamma\ket{11}.
+\end{equation*}
+We will see this gate in use when we'll study the Deutsch-Jozsa algorithm.
+
 \subsection{Quantum Finite Automaton}
 \subsubsection{Quantum Languages}
 Let $\Sigma$ be an alphabet, and $L\subseteq \Sigma^\star$ a language over the alphabet $\Sigma$. Another way to see this language, apart from a subset of $\Sigma^\star$, is using its characteristic function $\chi_L$:
@@ -201,7 +248,7 @@ Let $\Sigma$ be an alphabet, and $L\subseteq \Sigma^\star$ a language over the a
     \end{cases*}
 \end{equation*}
 
-By analogy to this, we can define a \emph{quantum language} as a function mapping words to probabilities.
+By analogy to this, we can define a \emph{quantum language} as a function mapping words to probabilities.\cite{quantum-automata-grammars}
 \begin{definition}[Quantum language]
     A quantum language over the alphabet $\Sigma$ is a function $f$ such as:
     \begin{equation*}
@@ -259,7 +306,7 @@ The end of the process corresponds to a measurement, and $f_Q(w)$ can be interpr
 \end{definition}
 
 \subsection{Quantum Turing Machine}
-Similarly to the classical case, the previous constructions can be generalized to gain expressivity. This leads to the following definition of a Quantum Turing Machine, the equivalent of a classical Turing machine, but using the previous constructions using Hilbert spaces and transition matrices:
+Similarly to the classical case, the previous constructions can be generalized to gain expressivity. This leads to the following definition of a Quantum Turing Machine\cite{qtm-circuits}\cite{qc-theory-bernstein}, the equivalent of a classical Turing machine, but using the previous constructions using Hilbert spaces and transition matrices:
 
 \begin{definition}[QTM] A \emph{Quantum Turing Machine} (or QTM) $M = (H, \Gamma, b, \Sigma, \delta, q_0, F)$ consists of:
 \begin{enumerate}[label=--, noitemsep]
@@ -294,21 +341,26 @@ The formal definition often involves a maximum error of $\frac{1}{3}$ in one run
 
 
 \subsection{Relationship with the Church-Turing Thesis}
-\begin{definition}[Church-Turing Thesis]
+\begin{thesis}[Church-Turing Thesis]
     A function on the natural numbers can be calculated by an effective method if and only if it is computable by a Turing machine.
-\end{definition}
+\end{thesis}
 
 Any quantum algorithm can be simulated either by hand, or on a classical computer, even if the resulting complexity of the computation is changed. Formally, it can be shown that a quantum Turing machine can be simulated on a Universal Turing Machine. Therefore, the existence of quantum computers do not disprove the Church-Turing thesis.
 
 Nevertheless, the Church-Turing thesis do not state anything about the time complexity of the simulation. Historically, this lead to the following extension of the Church-Turing Thesis:
-\begin{definition}[Extended Church-Turing Thesis]
+\begin{thesis}[Extended Church-Turing Thesis]
     A probabilistic Turing machine can efficiently simulate any realistic model of computation.
-\end{definition}
+\end{thesis}
 
-Showing that $BPP \varsubsetneq BQP$ would imply that quantum computers are in certain cases more efficient than classical computers. This would therefore invalidate the extended Church–Turing thesis. A quantum-extended version of the thesis has therefore been proposed. %\cite{quantum-applied}
+Showing that $BPP \varsubsetneq BQP$ would imply that quantum computers are in certain cases more efficient than classical computers. This would therefore invalidate the extended Church–Turing thesis. A quantum-extended version of the thesis has therefore been proposed\cite{quantum-applied}:
+\begin{thesis}[Quantum-extended Church-Turing Thesis]
+    Any realistic physical computing device can be efficiently simulated by a fault-tolerant quantum computer.
+\end{thesis}
+
+Overall, what these variations of the original Church-Turing thesis show, is that the existence of quantum computers do not change our fundamental understanding of what computation is. Quantum computers are only capable of solving problems we can already solve classically. Nevertheless, a sufficiently large quantum computer could \emph{efficiently} solve problems that are to this day considered as "hard" in practice. 
 
 \section{The Deutsch-Jozsa Algorithm}
-The Deutsch-Jozsa is an important quantum algorithm, not because of any practical use, but because it shows the interest of a quantum computer over a classical computer. The existence of the problem and algorithm proves that there is an \emph{oracle separation} between the EQP and P class: this is a black box problem that can be solved in polynomial time using a quantum computer, but that cannot be solved by a classical computer in polynomial time.
+The Deutsch-Jozsa algorithm\cite{deutsch-jozsa} is an important quantum algorithm, not because of any practical use, but because it shows the interest of a quantum computer over a classical computer. The existence of the problem and algorithm proves that there is an \emph{oracle separation} between the EQP and P class: this is a black box problem that can be solved in polynomial time using a quantum computer, but that cannot be solved by a classical computer in polynomial time.
 
 \subsection{Problem description}
 Let's consider a function $f$ operating on $n$ bits or qubits. That is:
@@ -331,8 +383,7 @@ A deterministic computer needs in the worst case to mesure more than half the $2
 \section*{Conclusion}
 \addcontentsline{toc}{section}{Conclusion}
 
-%\nocite{*}
-%\bibliographystyle{plain}
-%\bibliography{report}
+\nocite{*}
+\printbibliography
 
 \end{document}
