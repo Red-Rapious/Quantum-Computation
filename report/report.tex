@@ -110,7 +110,6 @@ When dealing with simple amplitudes, like $\alpha, \beta\in [0, 1]$, the state o
 
 Nevertheless, visualizing the state of a qubit - and the transformations of this state as physical transformations are applied to it - can be challenging. A common way to visualize a qubit is the Bloch sphere.
 
-\setlength{\columnsep}{0pt}
 \begin{wrapfigure}{r}{0.4\textwidth}
     \centering
     \includegraphics*{bloch-sphere}
@@ -217,7 +216,14 @@ The set of gates above lack expressivity, since they operate on a single qubit o
 \end{example}
 
 \subsubsection{CNOT gate}
-The \emph{Controlled NOT} gate, (or CNOT gate) is a fundamental gate, which allows to entangle qubits. It acts on two qubits, a \emph{control qubit}, and a \emph{target qubit}. Intuitively, if the control qubit is $\ket{0}$, the target qubit is unchanged; if the control qubit is $\ket{1}$, we apply an $X$ gate to the target qubit. Note that this description was expressed in the $(\ket{0}, \ket{1})$ basis, but that the control qubit is in general in a superposition of pure states.
+\begin{wrapfigure}{l}{0.5\textwidth}
+    \centering
+    \includegraphics*[scale=0.5]{cnot.png}
+    \caption{Circuit representation of CNOT}
+\end{wrapfigure}
+The \emph{Controlled NOT} gate, (or CNOT gate) is a fundamental gate, which allows to entangle qubits. It acts on two qubits, a \emph{control qubit}, and a \emph{target qubit}. Intuitively, if the control qubit is $\ket{0}$, the target qubit is unchanged; if the control qubit is $\ket{1}$, we apply an $X$ gate to the target qubit. (Note that this description was expressed in the $(\ket{0}, \ket{1})$ basis, but that the control qubit is in general in a superposition of pure states.) 
+
+This gate can be interpreted as the quantum equivalent of the classical "reversible XOR" gate, a $2\times 2$ gate taking in input $x$ and $y$, and returning $x$ and $x\oplus y$\footnote{$\oplus$ is used in quantum mechanics to denote the addition modulo 2, or similarly the XOR operation}.
 
 The action of the CNOT gate corresponds to the following matrix:
 \begin{equation*}
