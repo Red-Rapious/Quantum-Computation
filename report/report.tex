@@ -105,16 +105,16 @@ Furthermore, we can model an action that changes the qubit's state simply by a m
 Obviously, we want $\ket{\Psi'}$ to respect the normalization condition for every qubit $\Psi$. This requires $U$ to be a unitary matrix, that is $UU^\dagger = I_2$, where $U^\dagger$ is the conjugate transpose of $U$\footnote{The conjugate transpose is usually noted $U^\star$, but I guess that quantum physicists prefer the medieval vibe of $\dagger$.}.
 
 \subsection{The Bloch sphere}
-When dealing with simple amplitudes, like $\alpha, \beta\in [0, 1]$, the state of a qubit can be simply represented using a 1-dimensional line:
+%When dealing with simple amplitudes, like $\alpha, \beta\in [0, 1]$, the state of a qubit can be simply represented using a 1-dimensional line:
 % TODO: insert picture
-
-Nevertheless, visualizing the state of a qubit - and the transformations of this state as physical transformations are applied to it - can be challenging. A common way to visualize a qubit is the Bloch sphere.
 
 \begin{wrapfigure}[13]{r}{0.4\textwidth}
     \centering
     \includegraphics*{bloch-sphere}
     \caption{A Bloch sphere}
 \end{wrapfigure}
+
+Visualizing the state of a qubit - and the transformations of this state as physical transformations are applied to it - can be challenging. A common way to visualize a qubit is the Bloch sphere.
 
 Since $\|\ket{\Psi}\|_2=1$, we can uniquely\footnote{Except when $\ket{\Psi}=\ket{0}$ or $\ket{\Psi}=\ket{1}$, since $\phi$ can take any value.} write $\ket{\Psi}$ as:
 \begin{equation*}
@@ -129,7 +129,7 @@ The mesure of the qubit $\ket{\Psi}$ can be seen as the projection of this vecto
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics*[scale=0.5]{bloch-examples.png}
+    \includegraphics*[scale=0.4]{bloch-examples.png}
     \caption{Examples of vectors on the Bloch sphere for some simple states}
 \end{figure}
 
@@ -137,7 +137,13 @@ The mesure of the qubit $\ket{\Psi}$ can be seen as the projection of this vecto
 To study the complexity of different problems with a quantum point of view, we need a model for a quantum computer. Much like classical computers, two approaches coexist: the representation of a quantum computer as a circuit, using quantum logic gates, and an abstract model called quantum Turing machine, by analogy with the classical Turing machine.
 
 \subsection{Quantum Circuits}
-A \emph{quantum circuit} is the counterpart of the classical circuit; from an abstract point of view, it is composed of a multiple qubits, a sequence of \emph{quantum gates}, and special gates called \emph{measurements}, the quantum phenomenon which projects the qubit in one pure state. Each line of the circuit represents one qubit, and the $x$-axis represents time. 
+A \emph{quantum circuit} is the counterpart of the classical circuit; from an abstract point of view, it is composed of a multiple qubits, a sequence of \emph{quantum gates}, and special gates called \emph{measurements}, the quantum phenomenon which projects the qubit in one pure state. Consider the circuit below as an example. Each line of the circuit represents one qubit, and the $x$-axis represents time.
+
+\begin{figure}[!h]
+    \centering
+    \includegraphics*[scale=0.35]{deutsch-circuit-n.png}
+    \caption{An example circuit (Deutsch-Jozsa's algorithm, which we will study later)}
+\end{figure}
 
 A quantum gate takes into input $n$ qubits, and modifies the probability of each qubit to be in each state. This can be seen visualy: the quantum gate changes the position of the qubit on the surface of the Bloch sphere. Therefore, quantum gates are often represented as unitary matrices of size $2^n \times 2^n$, i.e. elements of $U(2^n, \mathbb{C})$. We will now present a few basic quantum gates.
 
@@ -189,7 +195,7 @@ meaning that a qubit starting in a \emph{pure} state ($\ket{0}$ or $\ket{1}$) is
     \label{fig:basic-circuit}
     \centering
     \includegraphics*[scale=0.3]{basic-circuit.png}
-    \caption{A basic circuit}
+    \caption{A basic circuit with the H gate}
 \end{wrapfigure}
 
 If we consider the circuit \ref{fig:basic-circuit} on the left, the probability to measure $\ket{0}$ is exactly $\frac{1}{2}$. (Note that this is possibly the only method to have true random numbers.) If we were to modify the circuit to add an $X$ gate between the Hadamard gate and the measuring "gate", the outputs probabilities would not change. 
