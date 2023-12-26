@@ -11,6 +11,7 @@
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{amsthm}
+\usepackage{graphicx}
 
 \usepackage{mathtools}
 \usepackage{wrapfig}
@@ -23,6 +24,7 @@
 \usepackage{hyperref}
 
 \addbibresource{report.bib}
+\graphicspath{{./images/}}
 
 \theoremstyle{plain}
 \newtheorem*{theorem}{Theorem}
@@ -36,7 +38,7 @@
 
 \makeatletter
 
-\title{\vspace{-5ex} \textbf{Quantum Computation}}
+\title{\vspace{-5ex} \textbf{Quantum Computation:\\a formal introduction}}
 \author{Antoine Groudiev}
 \date{\vspace{-1ex}\today}
 \markright{Antoine Groudiev}{}
@@ -526,6 +528,9 @@ This shows that some problems, the most famous one being the prime factoring pro
 
 \section*{Conclusion}
 \addcontentsline{toc}{section}{Conclusion}
+We hope that this introduction to quantum computation gave you an overall understanding how quantum computers work. The main idea emerging from the multiple approaches we took to describe a quantum computer (quantum circuits, formal languages, complexity theory) is that a quantum computer are distinct from classical computers, not necessary better in every way. We saw that some problems could be efficiently solved on a quantum computer while no efficient classical solution exist. On the other hand, building a quantum computer is a technological challenge, making -- to this day -- most problems easier to solve on classical computers.
+
+Nevertheless, the possibility of the existence of a large enough quantum computer is already starting to raise new theorical questions in multiple fields of computer science: complexity theory, with the emergence of new complexity classes; cryptography, with the search for quantum-proof cryptography algorithms, \dots 
 
 \nocite{*}
 \printbibliography
