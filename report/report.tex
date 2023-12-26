@@ -65,7 +65,7 @@ A qubit of state $\Psi$ is noted $\ket{\Psi}$, and is in a superposition of the 
 \begin{equation*}
     \ket{\Psi}=\alpha\ket{\Psi}+\beta\ket{\Psi}
 \end{equation*}
-where $\alpha, \beta\in \mathbb{C}$ are called the states amplitudes. 
+where $\alpha, \beta\in \mathbb{C}$ are called the \emph{states amplitudes}. 
 
 \begin{example}[Schrödinger's cat]
     \begin{equation*}
@@ -73,11 +73,11 @@ where $\alpha, \beta\in \mathbb{C}$ are called the states amplitudes.
     \end{equation*}
 \end{example}
 
-The probability to measure the qubit in the state $\ket{0}$ (and respectively $\ket{1}$) is $|\alpha|^2$ (respectively $|\beta|^2$). This interpretation gives us a normalization condition:
+The probability to measure the qubit in the state $\ket{0}$ (and respectively $\ket{1}$) is $|\alpha|^2$ (respectively $|\beta|^2$). This interpretation gives us the \emph{normalization condition}:
 \begin{equation*}
     |\alpha|^2+|\beta|^2=1
 \end{equation*}
-since the qubit must be measured in one on the two states.
+since the qubit must be measured in one of the two states.
 
 \begin{example}[LFCC exam]
     Assume that you have a probability $p\in[0, 1]$ of passing the next LFCC exam. Your result at the exam can be represented using one qubit in the following state:
@@ -119,7 +119,7 @@ Since $\|\ket{\Psi}\|_2=1$, we can uniquely\footnote{Except when $\ket{\Psi}=\ke
 \begin{equation*}
     \ket{\Psi}=\cos(\theta/2)\:\ket{0} + e^{i\phi}\sin(\theta/2)\: \ket{1}
 \end{equation*}
-where $0\leq\theta\leq\pi$ and $0\leq\phi<2\pi$. This parametrization of $\ket{\Psi}$ corresponds to spherical coordinates, and uniquely define a vector $\vec{a}\in\mathbb{R}^3$:
+where $0\leq\theta\leq\pi$ and $0\leq\phi<2\pi$. This parametrization of $\ket{\Psi}$ corresponds to spherical coordinates, and uniquely defines a vector $\vec{a}\in\mathbb{R}^3$:
 \begin{equation*}
     \vec{a}=\begin{pmatrix}\sin\theta\cos\phi\\\sin\theta\sin\phi\\\cos\theta\end{pmatrix}
 \end{equation*}
@@ -198,7 +198,7 @@ meaning that a qubit starting in a \emph{pure} state ($\ket{0}$ or $\ket{1}$) is
     \caption{A basic circuit with the H gate}
 \end{wrapfigure}
 
-If we consider the circuit \ref{fig:basic-circuit} on the left, the probability to measure $\ket{0}$ is exactly $\frac{1}{2}$. (Note that this is possibly the only method to have true random numbers.) If we were to modify the circuit to add an $X$ gate between the Hadamard gate and the measuring "gate", the outputs probabilities would not change. 
+If we consider the circuit \ref{fig:basic-circuit} on the left, the probability to measure $\ket{0}$ is exactly $\frac{1}{2}$. (Note that this is possibly the only method to have true random numbers.) If we were to replace the initial state of the qubit from $\ket{0}$ to $\ket{1}$. Similarly, if we were to modify the circuit to add an $X$ gate between the Hadamard gate and the measuring "gate", the outputs probabilities would not change. 
 
 Note that like every quantum gate represented by an unitary matrix, and unlike many classical gates, the Hadamard gate is reversible. This might seem counter-intuitive since the previous example suggests that we "lost" the information on the qubit. 
 
@@ -207,18 +207,18 @@ Note that like every quantum gate represented by an unitary matrix, and unlike m
 \end{remark}
 
 \subsubsection{Entanglement}
-The set of gates above lack expressivity, since they operate on a single qubit only. A pure quantum phenomenon is \emph{entanglement}, meaning that multiple qubits are correlated.
+The set of gates above lack expressivity, since they operate on a single qubit only. We will now present a gate acting on multiple qubits. This highlights a pure quantum phenomenon which is \emph{entanglement}, meaning that multiple qubits are correlated.
 
 \begin{example}[Bell's entanglement]
     Consider two untangled qubits $\Psi$ and $\Phi$. Their default state is:
     \begin{equation*}
-        \ket{\Psi\Phi} = \frac{1}{\sqrt{4}} \left(\ket{00}+\ket{01}+\ket{10}+\ket{11}\right)
+        \ket{\Psi\Phi} = \frac{1}{2} \left(\ket{00}+\ket{01}+\ket{10}+\ket{11}\right)
     \end{equation*}
     meaning that each outcome of the universe $\{(0,0); (1,1); (1,0); (1,1)\}$ is equally probable. By entangling $\Psi$ and $\Phi$, it is possible to put them in the \emph{Bell state}, that is: 
     \begin{equation*}
         \ket{\Psi\Phi} = \frac{1}{\sqrt{2}} \left(\ket{00}+\ket{11}\right)
     \end{equation*}
-    Where the only possible outcomes are $(0, 0)$ and $(1, 1)$. By measuring $\Psi$, we can deduct the "value" of $\Phi$, exactly as if it was measured, which breaks the quantum superposition phenomenon, no matter the distance between both qubits.\footnote{This is what Einstein called "spooky action at a distance"}
+    Where the only possible outcomes are $(0, 0)$ and $(1, 1)$. By measuring $\Psi$, we can deduct the "value" of $\Phi$, exactly as if it was measured, which breaks the quantum superposition phenomenon, no matter the distance between both qubits.\footnote{This is what Einstein called the "spooky action at a distance"}
 \end{example}
 
 \subsubsection{CNOT gate}
@@ -227,7 +227,7 @@ The set of gates above lack expressivity, since they operate on a single qubit o
     \includegraphics*[scale=0.5]{cnot.png}
     \caption{Circuit representation of CNOT}
 \end{wrapfigure}
-The \emph{Controlled NOT} gate, (or CNOT gate) is a fundamental gate, which allows to entangle qubits. It acts on two qubits, a \emph{control qubit}, and a \emph{target qubit}. Intuitively, if the control qubit is $\ket{0}$, the target qubit is unchanged; if the control qubit is $\ket{1}$, we apply an $X$ gate to the target qubit. (Note that this description was expressed in the $(\ket{0}, \ket{1})$ basis, but that the control qubit is in general in a superposition of pure states.) 
+The \emph{Controlled NOT} gate, (or CNOT gate) is a fundamental gate which allows to entangle qubits. It acts on two qubits, a \emph{control qubit}, and a \emph{target qubit}. Intuitively, if the control qubit is $\ket{0}$, the target qubit is unchanged; if the control qubit is $\ket{1}$, we apply an $X$ gate to the target qubit. (Note that this description was expressed in the $(\ket{0}, \ket{1})$ basis, but that the control qubit is in general in a superposition of pure states.) 
 
 This gate can be interpreted as the quantum equivalent of the classical "reversible XOR" gate, a $2\times 2$ gate taking in input $x$ and $y$, and returning $x$ and $x\oplus y$\footnote{$\oplus$ is used in quantum mechanics to denote the addition modulo 2, or similarly the XOR operation}.
 
@@ -248,9 +248,10 @@ in
 \begin{equation*}
     \alpha\ket{00}+\beta\ket{01}+\delta\ket{10}+\gamma\ket{11}.
 \end{equation*}
-We will see this gate in use when we'll study the Deutsch-Jozsa algorithm.
 
 \subsection{Quantum Finite Automaton}
+% TODO 
+
 \subsubsection{Quantum Languages}
 Let $\Sigma$ be an alphabet, and $L\subseteq \Sigma^\star$ a language over the alphabet $\Sigma$. Another way to see this language, apart from a subset of $\Sigma^\star$, is using its characteristic function $\chi_L$:
 \begin{equation*}
@@ -260,7 +261,7 @@ Let $\Sigma$ be an alphabet, and $L\subseteq \Sigma^\star$ a language over the a
     \end{cases*}
 \end{equation*}
 
-By analogy to this, we can define a \emph{quantum language} as a function mapping words to probabilities. \cite{quantum-automata-grammars}
+By analogy to this, we can define a \emph{quantum language} as a function mapping words to probabilities: \cite{quantum-automata-grammars}
 \begin{definition}[Quantum language]
     A quantum language over the alphabet $\Sigma$ is a function $f$ such as:
     \begin{equation*}
@@ -280,7 +281,7 @@ By analogy to this, we can define a \emph{quantum language} as a function mappin
         \item a function $\delta : \Sigma \to U_n(\mathbb{C})$\footnote{$U_n(\mathbb{C})$ is the set of unitary matrices of size $n$}, mapping each letter of $a\in\Sigma$ to a unitary matrix $U_a\in\Sigma$.
     \end{enumerate}
     
-    We will also write $\delta^\star(w=w_1\cdots w_{|w|}) = \delta(w_{|w|})\cdots \delta(w_1) = U_{w_{|w|}}\cdots U_{w_1}$. Finally, the language recognized by $Q$ is the following function:
+    We will write $\delta^\star(w=w_1\cdots w_{|w|}) = \delta(w_{|w|})\cdots \delta(w_1) = U_{w_{|w|}}\cdots U_{w_1}$. Finally, the language recognized by $Q$ is the following function:
     \begin{equation*}
         f_Q : w \mapsto \|P_{\textnormal{accept}}\delta^\star(w)s_{\textnormal{init}}\|^2
     \end{equation*}
@@ -312,16 +313,16 @@ The end of the process corresponds to a measurement, and $f_Q(w)$ can be interpr
     \end{itemize}
     A \emph{production} of $P$ is of the form $\alpha\to \beta$, where $(\alpha, \beta)\in V^\star\times (T\cup V)^\star$. To each production in $P$ is associated a set of complex amplitudes $\left(c_k(\alpha\to\beta)\right)_{1\leq k\leq n}$.
 
-    Consider one derivation $\alpha\Rightarrow\beta$, a chain of strings in which at each step one substring is replaced with another according to a production rule. We define the $k$-th amplitude $c_k$ of \emph{one} derivation to be the product of the $k$-th amplitudes of the derivations used in the chain. Furthermore, we define $c_k(\alpha\Rightarrow\beta)$ to be the product of the $c_k$'s for \emph{all the derivation} from $\alpha$ to $\beta$.
+    Consider one derivation $\alpha\Rightarrow\beta$, a chain of strings in which at each step one substring is replaced with another according to a production rule. We define the $k$-th amplitude $c_k$ of \emph{one} derivation to be the product of the $k$-th amplitudes of the productions used in the chain. Furthermore, we define $c_k(\alpha\Rightarrow\beta)$ to be the product of the $c_k$'s for \emph{all the derivation} from $\alpha$ to $\beta$.
 
-    The $k$-th amplitude of a word $w\in T^\star$ is defined as $c_k(w) = c_k(I\Rightarrow w)$. Finally, $G$ \emph{generates} the quantum language $f$ defined as:
+    The $k$-th amplitude of a word $w\in T^\star$ is defined as $c_k(w) := c_k(I\Rightarrow w)$. Finally, $G$ \emph{generates} the quantum language $f$ defined as:
     \begin{equation*}
         f(w) = \sum_{k=1}^n \|c_k(w)\|^2
     \end{equation*}
 \end{definition}
 
 \begin{remark}
-    This construction appear to be much more complicated than the standard grammar construction. This is mainly because of the introduction of the $n$ different amplitudes $(c_k)$. Why do we need multiple amplitudes instead of just one? The reason is pretty technical, but multiple amplitudes are needed to prevent multiple paths from interfering.
+    This construction appears to be much more complicated than the standard grammar construction. This is mainly because of the introduction of the $n$ different amplitudes $(c_k)$. Why do we need multiple amplitudes instead of just one? The reason is pretty technical, but multiple amplitudes are needed to prevent multiple paths from interfering.
 \end{remark}
 
 \begin{definition}[QCFG]
@@ -340,7 +341,7 @@ As you could have guessed, an important result on QCFL is that a quantum languag
         \item a Hilbert space $H$ (the space of configurations of the automata). More specifically, we must have $H=Q\otimes \Sigma$ for some spaces $Q$, $\Sigma$\footnote{$Q\otimes \Sigma$ denotes the tensor product of spaces $Q$ and $\Sigma$}
         \item $Q$ is a finite-dimensional space called the \emph{control state}
         \item $\Sigma$ is an inifinite-dimensional space called the \emph{stack space}
-        \item each basis vector of $\Sigma$ is a finite word over the stack alphabet $T$
+        \item each basis vector of $\Sigma$ is a finite word over the \emph{stack alphabet} $T$
         \item an initial state $s_{\textnormal{init}}$, which must be a superposition of a finite number of initial control states and stack states
         \item a subspace $Q_{\textnormal{acccept}} \subseteq Q$, such as the accepting space $H_{\textnormal{acccept}}=Q_{\textnormal{acccept}}\otimes \{\varepsilon\}$ (this requires that the stack is empty at the end of the word for it to be accepted by the automata)
         \item an operator $P_{\textnormal{acccept}}$ projecting on $Q_{\textnormal{acccept}}\otimes \{\varepsilon\}$
@@ -354,6 +355,8 @@ As you could have guessed, an important result on QCFL is that a quantum languag
     \end{equation*}
     meaning that the transition can only push, pop, or leave the stack unchanged. Furthermore, transition amplitudes can only depend on the top (rightmost) symbol of $\sigma_1$ and $\sigma_2$.
 \end{definition}
+
+% TODO: acceptance
 
 \begin{remark}
     Unlike a classical PDA, transitions can depend on both the top symbol of the stack, and the symbol below it. This is because we allowed the dependency on both $\sigma_1$ and $\sigma_2$. This is necessary for the endomorphisms to be unitary. 
@@ -370,9 +373,9 @@ Similarly to the classical case, the previous constructions can be generalized t
 \begin{enumerate}[label=--, noitemsep]
     \item a Hilbert space $Q$ (replacing the classical set of states $Q$)
     \item another Hilbert space $\Gamma$ (replacing the classical set of tape symbols)
-    \item a blank symbol $b\in \Gamma$
+    \item a blank symbol $\sqcup\in \Gamma$
     \item an alphabet of input and output symbols $\Sigma$
-    \item an initial set $q_0\in Q$
+    \item an initial state $q_0\in Q$
     \item a subset $Q_{\textnormal{accept}}\subseteq Q$ of accepting states (and, as usual, an operator $P_{\textnormal{accept}}$ which projects onto it)
     \item a transition function $\delta$ such as:
     \begin{equation*}
@@ -385,7 +388,7 @@ Similarly to the classical case, the previous constructions can be generalized t
 \end{enumerate}
 
 \begin{remark}
-    There is different common definitions of the classical Turing machine, but they are all pretty similar; the differences are often about whether the head can stay in place, whether the tape is indexed by $\mathbb{N}$ or $\mathbb{Z}$, etc. In the case of a quantum Turing machine, many definitions coexist, with major differences in the handling of the tape, the measurement, and the output. The main idea to use unitary matrices to transform both the Hilbert space $Q$ and the tape was introducted by Deutsch in \cite{deutsch-qtm}. Since this first publication, another definition by Bernstein and Vazirani in \cite{qc-theory-bernstein} has been vastly used for quantum complexity theory. Recent papers, such as \cite{guerrini}, try to unify these two standard approaches of QTM, but no clear standard definition of a QTM has emerged. The definition given above is more of a sketch of a definition which tries to unify both approaches.
+    There is different common definitions of the classical Turing machine, but they remain all quite similar; the differences are often about whether the head can stay in place, whether the tape is indexed by $\mathbb{N}$ or $\mathbb{Z}$, etc. In the case of a quantum Turing machine, many definitions coexist, with major differences in the handling of the tape, the measurement, and the output. The main idea to use unitary matrices to transform both the Hilbert space $Q$ and the tape was introducted by Deutsch in \cite{deutsch-qtm}. Since this first publication, another definition by Bernstein and Vazirani in \cite{qc-theory-bernstein} has been vastly used for quantum complexity theory. Recent papers, such as \cite{guerrini}, try to unify these two standard approaches of QTM, but no clear standard definition of a QTM has emerged. The definition given above is more of a sketch of a definition which tries to unify both approaches.
 \end{remark}
 
 \end{definition}
@@ -400,7 +403,10 @@ An important class of problem is the BQP class; it is the equivalent of the BPP 
 \begin{definition}[BQP] 
     The \emph{Bounded-error Quantum Polynomial time} (BQP) class is the set of decision problems which can be solved in polynomial time by a quantum Turing machine, with an error of at most $\frac{1}{3}$. 
 \end{definition}
-The formal definition often involves a maximum error of $\frac{1}{3}$ in one run, but any bound strictly lower than $\frac{1}{2}$ is sufficient, since multiple runs of the algorithm can be chained to reduce the error.
+
+\begin{remark}
+    The formal definition often involves a maximum error of $\frac{1}{3}$ in one run, but any bound strictly lower than $\frac{1}{2}$ is sufficient, since multiple runs of the algorithm can be chained to reduce the error.
+\end{remark}
 
 \begin{definition}[Promise-BQP]
     The \emph{Promise-BQP} class is the generalization of the BQP class, in which the input is \emph{promised} to belong to a specific subset of all inputs.
@@ -437,12 +443,13 @@ Most of these proofs use APPROX-QCIRCUIT-PROB.
     \caption{Known and suspected inclusions of BQP}
 \end{figure}
 
-These inclusions are interesting but simply show that a quantum computer is at least as good as a classical computer. An important question is the relationship between BQP and NP. A main reason for this is the uncertainty we have about whether P=NP. Nevertheless, it is believed that BQP contains problems that are not in P, such as integer factorization.
+These inclusions are interesting but simply show that a quantum computer is at least as good as a classical computer. An important question is the relationship between BQP and NP, which remains unsolved. A main reason for this is the uncertainty we have about whether P=NP. Nevertheless, it is believed that BQP contains problems that are not in P, such as integer factorization, which would imply that $BQP\cap NP \neq \varnothing$.
 
 Furthermore, it has been recently proven\cite{oracle-bqp-ph} that there is an oracle relative to which BQP is not contained in PH, the polynomial hierarchy, which would suggest -- but not prove -- that $BQP \nsubseteq PH$.
 
 
 \subsection{Relationship to the Church-Turing Thesis}
+% TODO: intro
 \begin{thesis}[Church-Turing Thesis]
     A function on the natural numbers can be calculated by an effective method if and only if it is computable by a Turing machine.
 \end{thesis}
@@ -459,7 +466,7 @@ Showing that $BPP \varsubsetneq BQP$ would imply that quantum computers are in c
     Any realistic physical computing device can be efficiently simulated by a fault-tolerant quantum computer.
 \end{thesis}
 
-Overall, what these variations of the original Church-Turing thesis show, is that the existence of quantum computers do not change our fundamental understanding of what computation is. Quantum computers are only capable of solving problems we can already solve classically. Nevertheless, a sufficiently large quantum computer could \emph{efficiently} solve problems that are to this day considered as "hard" in practice. 
+Overall, what these variations of the original Church-Turing thesis show, is that the existence of quantum computers do not change our fundamental understanding of what computation is. Quantum computers are only capable of solving problems we can already solve classically. Nevertheless, a sufficiently large quantum computer could \emph{efficiently} solve problems that are to this day considered as "hard" in practice, such as the integer factorization problem.
 
 \section{The Deutsch-Jozsa Algorithm}
 The Deutsch-Jozsa algorithm\cite{deutsch-jozsa} is an important quantum algorithm, not because of any practical use, but because it shows the interest of a quantum computer over a classical computer. The existence of the problem and algorithm proves that there is an \emph{oracle separation} between the EQP and P class: this is a black box problem that can be solved in polynomial time using a quantum computer, but that cannot be solved by a classical computer in polynomial time.
@@ -478,10 +485,10 @@ This means that either the function produces only \texttt{0}, or it produces onl
 The $f$ function behaves like a black box, or an \emph{oracle}: it is able to output the outcome of $f(x)$ in a single operation for any $x$. The algorithm is asked to determine whether the function is constant or balanced.
 
 \subsection{Classical solution}
-A deterministic computer needs in the worst case to measure more than half the $2^n$ possible outcomes for $f$, i.e. $2^{n-1}+1$; the best time complexity is therefore exponential. Nevertheless, this problem can be solved efficiently on a probabilistic computer with a high probability.
+A deterministic computer needs in the worst case to measure more than half the $2^n$ possible outcomes for $f$, i.e. $2^{n-1}+1$; the best time complexity is therefore exponential. Nevertheless, this problem can be solved efficiently on a probabilistic computer with a high probability, making it in $BPP$.
 
 \subsection{Quantum algorithm}
-We will describe the algorithm in the case $n=1$, simply known as Deutsch's algorithm. Interestingly, the same procedure simply extends to any value of $n$. 
+We will describe the algorithm in the case $n=1$, simply known as Deutsch's algorithm. Interestingly, the same procedure simply extends to any value of $n$, as we will see in the next subsection. 
 
 The implementation of the function $f$ is assumed to be of the form:
 \begin{equation*}
@@ -499,7 +506,7 @@ The algorithm uses two qubits. Its circuit representation is the following:
 Note that we will only measure the first qubit.\footnote{The second qubit is known as an \emph{ancilla qubit}: \url{https://en.wikipedia.org/wiki/Ancilla_bit}} The goal of this circuit is to obtain the value of $f(0)\oplus f(1)$. If the function is constant, $f(0)\oplus f(1) = 0$, and if the function is balanced, $f(0)\oplus f(1) = 1$. Therefore, by knowing the value of $f(0)\oplus f(1)$, we can determine using the promise whether $f$ is constant or balanced. We will now describe the algorithm step-by-step.
 
 \begin{enumerate}
-    \item Initialize two qubits in the states such as the \emph{product state} of the qubits is $\ket{0}\ket{1}$.
+    \item Initialize two qubits such as the \emph{product state} of the qubits is $\ket{0}\ket{1}$.
     \item Apply to each qubit a Hadamard transform (fancy name for applying a Hadamard gate). The state changes to:
     \begin{equation*}
         \left(\frac{\ket{0}+\ket{1}}{\sqrt{2}}\right) \left(\frac{\ket{0}-\ket{1}}{\sqrt{2}}\right)
@@ -532,7 +539,7 @@ The ideas for the general case of the Deutsch-Jozsa algorithm are the exact same
 
 You can show, using calculations similar to what we did before, that the final probability to measure $\ket{0}^{\otimes n}$ is:
 \begin{equation*}
-    \|\frac{1}{2^n}\sum_{x=0}^{2^n-1}(-1)^{f(x)}\|^2
+    \left\|\frac{1}{2^n}\sum_{x=0}^{2^n-1}(-1)^{f(x)}\right\|^2
 \end{equation*}
 which is $1$ if and only if $f$ is constant.
 Therefore, by measuring the $n$ first qubits at the end, you can answer the problem by simply browsing in linear time the result of the measures; if a non-zero state is measured, $f$ is balanced (according to the promise), otherwise $f$ is constant.
@@ -545,9 +552,11 @@ This shows that some problems, the most famous one being the integer factorizati
 
 \section*{Conclusion}
 \addcontentsline{toc}{section}{Conclusion}
-We hope that this introduction to quantum computation gave you an overall understanding how quantum computers work. The main idea emerging from the multiple approaches we took to describe a quantum computer (quantum circuits, formal languages, complexity theory) is that a quantum computer are distinct from classical computers, not necessary better in every way. We saw that some problems could be efficiently solved on a quantum computer while no efficient classical solution exist. On the other hand, building a quantum computer is a technological challenge, making -- to this day -- most problems easier to solve on classical computers.
+We hope that this introduction to quantum computation gave you an overall understanding of how quantum computers work. The main idea emerging from the multiple approaches we took to describe a quantum computer (quantum circuits, formal languages, complexity theory) is that quantum computers are distinct from classical computers, not necessary better in every way. We saw that some problems could be efficiently solved on a quantum computer while no efficient classical solution exist. On the other hand, building a quantum computer is a technological challenge, making -- to this day -- most problems easier to solve on classical computers.
 
 Nevertheless, the possibility of the existence of a large enough quantum computer is already starting to raise new theoretical questions in multiple fields of computer science: complexity theory, with the emergence of new complexity classes; cryptography, with the search for quantum-proof cryptography algorithms, \dots 
+
+% TODO
 
 \nocite{*}
 \printbibliography
