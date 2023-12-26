@@ -250,8 +250,7 @@ in
 \end{equation*}
 
 \subsection{Quantum Finite Automaton}
-% TODO 
-
+The formalization of quantum computers in formal circuits is useful to design quantum algorithms and quantum programming languages. Nevertheless, the study of quantum complexity theory requires formal tools that are easier to handle, similar to the tools provided by formal languages in classical computation. This lead to the introduction \cite{quantum-automata-grammars} of quantum languages and abstract machines around them.
 \subsubsection{Quantum Languages}
 Let $\Sigma$ be an alphabet, and $L\subseteq \Sigma^\star$ a language over the alphabet $\Sigma$. Another way to see this language, apart from a subset of $\Sigma^\star$, is using its characteristic function $\chi_L$:
 \begin{equation*}
@@ -354,9 +353,12 @@ As you could have guessed, an important result on QCFL is that a quantum languag
         (\sigma_1t = \sigma_2) \lor (\sigma_1 = \sigma_2t) \lor (\sigma_1 = \sigma_2)
     \end{equation*}
     meaning that the transition can only push, pop, or leave the stack unchanged. Furthermore, transition amplitudes can only depend on the top (rightmost) symbol of $\sigma_1$ and $\sigma_2$.
-\end{definition}
 
-% TODO: acceptance
+    Similarly to QFAs, the language recognized by $Q$ is the following function:
+    \begin{equation*}
+        f_Q : w \mapsto \|P_{\textnormal{accept}}\delta^\star(w)s_{\textnormal{init}}\|^2
+    \end{equation*}
+\end{definition}
 
 \begin{remark}
     Unlike a classical PDA, transitions can depend on both the top symbol of the stack, and the symbol below it. This is because we allowed the dependency on both $\sigma_1$ and $\sigma_2$. This is necessary for the endomorphisms to be unitary. 
@@ -449,7 +451,7 @@ Furthermore, it has been recently proven\cite{oracle-bqp-ph} that there is an or
 
 
 \subsection{Relationship to the Church-Turing Thesis}
-% TODO: intro
+Some non-computer-scientists might tend to think that quantum computers are able to "do things that no traditionnal computer can". While we will see that this remains false in theory, the emergence of quantum computers questionned the possibilities of computation and efficient computation. Recall the Church-Turing thesis:
 \begin{thesis}[Church-Turing Thesis]
     A function on the natural numbers can be calculated by an effective method if and only if it is computable by a Turing machine.
 \end{thesis}
@@ -461,9 +463,9 @@ Nevertheless, the Church-Turing thesis do not state anything about the time comp
     A probabilistic Turing machine can efficiently simulate any realistic model of computation.
 \end{thesis}
 
-Showing that $BPP \varsubsetneq BQP$ would imply that quantum computers are in certain cases more efficient than classical computers. This would therefore invalidate the extended Church–Turing thesis. A quantum-extended version of the thesis has therefore been proposed\cite{quantum-applied}:
+Showing that $BPP \varsubsetneq BQP$ would imply that quantum computers are in certain cases more efficient than classical computers. This would therefore invalidate the extended Church–Turing thesis. A quantum-extended version of the thesis has therefore been proposed, and is now the basis of computational complexity theory \cite{qc-theory-bernstein}:
 \begin{thesis}[Quantum-extended Church-Turing Thesis]
-    Any realistic physical computing device can be efficiently simulated by a fault-tolerant quantum computer.
+    Any realistic physical computing device can be efficiently simulated by a fault-tolerant quantum computer.\cite{quantum-applied}
 \end{thesis}
 
 Overall, what these variations of the original Church-Turing thesis show, is that the existence of quantum computers do not change our fundamental understanding of what computation is. Quantum computers are only capable of solving problems we can already solve classically. Nevertheless, a sufficiently large quantum computer could \emph{efficiently} solve problems that are to this day considered as "hard" in practice, such as the integer factorization problem.
@@ -554,9 +556,15 @@ This shows that some problems, the most famous one being the integer factorizati
 \addcontentsline{toc}{section}{Conclusion}
 We hope that this introduction to quantum computation gave you an overall understanding of how quantum computers work. The main idea emerging from the multiple approaches we took to describe a quantum computer (quantum circuits, formal languages, complexity theory) is that quantum computers are distinct from classical computers, not necessary better in every way. We saw that some problems could be efficiently solved on a quantum computer while no efficient classical solution exist. On the other hand, building a quantum computer is a technological challenge, making -- to this day -- most problems easier to solve on classical computers.
 
-Nevertheless, the possibility of the existence of a large enough quantum computer is already starting to raise new theoretical questions in multiple fields of computer science: complexity theory, with the emergence of new complexity classes; cryptography, with the search for quantum-proof cryptography algorithms, \dots 
+Nevertheless, the possibility of the existence of a large enough quantum computer is already starting to raise new theoretical questions in multiple fields of computer science: complexity theory, with the emergence of new complexity classes; cryptography, with the search for quantum-proof cryptography algorithms, \dots The theoretical interest of quantum computation might not be what they \emph{can} do, but instead the search of what they \emph{cannot}.
 
-% TODO
+\paragraph*{End word}
+Thank you for reading this far; if this interested you and you want to know more about this broad topic, I recommend reading:
+\begin{itemize}[label=--, noitemsep]
+    \item \cite{introduction-quantum-complexity} for more circuit-based complexity.
+    \item \cite{quantum-applied} for an easy and applied approach of quantum computing
+    \item \cite{quantum-automata-grammars} to delve further into the topic of Quantum Automata and Quantum grammars
+\end{itemize}
 
 \nocite{*}
 \printbibliography
