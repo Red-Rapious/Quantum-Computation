@@ -124,12 +124,13 @@ where $0\leq\theta\leq\pi$ and $0\leq\phi<2\pi$. This parametrization of $\ket{\
     \vec{a}=\begin{pmatrix}\sin\theta\cos\phi\\\sin\theta\sin\phi\\\cos\theta\end{pmatrix}
 \end{equation*}
 
-The measure of the qubit $\ket{\Psi}$ can be seen as the projection of this vector on either $\ket{0}$ or $\ket{1}$, i.e. on $\vec{z}$ or $-\vec{z}$. The closer the point on the sphere is to a pole, the higher the probability to be measured in this state. When the vector is pointing directly to the top, the probability to be measured in $\ket{0}$ is $1$; when pointing directly down, the probability is $0$, and when the vector is orthogonal to $\vec{z}$, the probability is $\frac{1}{2}$.
+The measure of the qubit $\ket{\Psi}$ can be seen as the projection of this vector on either $\ket{0}$ or $\ket{1}$, i.e. on $\vec{z}$ or $-\vec{z}$. The closer the point on the sphere is to a pole, the higher the probability to be measured in this state. When the vector is pointing directly to the top, the probability to be measured in $\ket{0}$ is $1$; when pointing directly down, the probability is $0$, and when the vector is orthogonal to $\vec{z}$, the probability is $\frac{1}{2}$, as shown in Figure \ref{fig:bloch-examples}.
 
 \begin{figure}[!ht]
     \centering
     \includegraphics*[scale=0.4]{bloch-examples.png}
     \caption{Examples of vectors on the Bloch sphere for some simple states}
+    \label{fig:bloch-examples}
 \end{figure}
 
 \section{Quantum Computational Models}
@@ -495,7 +496,7 @@ The algorithm uses two qubits. Its circuit representation is the following:
     \caption{The quantum circuit used by Deutsch's algorithm}
 \end{figure}
 
-Note that we will only measure the first qubit.\footnote{The second qubit is known as an \emph{ancilla qubit}: \url{https://en.wikipedia.org/wiki/Ancilla_bit}} The goal of this circuit is to obtain the value of $f(0)\oplus f(1)$. If the function is constant, $f(0)\oplus f(1) = 0$, and if the function is balanced, $f(0)\oplus f(1) = 1$. By knowing the value of $f(0)\oplus f(1)$, we can determine using the promise whether $f$ is constant or balanced. We will now describe the algorithm step-by-step.
+Note that we will only measure the first qubit.\footnote{The second qubit is known as an \emph{ancilla qubit}: \url{https://en.wikipedia.org/wiki/Ancilla_bit}} The goal of this circuit is to obtain the value of $f(0)\oplus f(1)$. If the function is constant, $f(0)\oplus f(1) = 0$, and if the function is balanced, $f(0)\oplus f(1) = 1$. Therefore, by knowing the value of $f(0)\oplus f(1)$, we can determine using the promise whether $f$ is constant or balanced. We will now describe the algorithm step-by-step.
 
 \begin{enumerate}
     \item Initialize two qubits in the states such as the \emph{product state} of the qubits is $\ket{0}\ket{1}$.
@@ -534,13 +535,13 @@ You can show, using calculations similar to what we did before, that the final p
     \|\frac{1}{2^n}\sum_{x=0}^{2^n-1}(-1)^{f(x)}\|^2
 \end{equation*}
 which is $1$ if and only if $f$ is constant.
-Therefore, by measuring the $n$ first qubits at the end, you can say answer the problem by simply browsing in linear time the result of the measures; if a non-zero state is measured, $f$ is balanced (according to the promise), otherwise $f$ is constant.
+Therefore, by measuring the $n$ first qubits at the end, you can answer the problem by simply browsing in linear time the result of the measures; if a non-zero state is measured, $f$ is balanced (according to the promise), otherwise $f$ is constant.
 
 
 \subsection{Complexity theory consequences}
 We saw that this problem could not be solved exactly by a classical computer in polynomial time, meaning that the problem is not in P. Nevertheless, the problem is exactly solvable by a quantum computer in polynomial time, hence it is a problem of the class EQP (Exact Quantum Polynomial time). Therefore, the problem yields an oracle relative to which $EQP \neq P$.
 
-This shows that some problems, the most famous one being the prime factoring problem, are exponentially slower\footnote{In the case of prime factoring, this is only true if P $\neq$ NP} on a classical computer than on a quantum computer.
+This shows that some problems, the most famous one being the integer factorization problem, are exponentially slower\footnote{In the case of integer factorization, this is only true if P $\neq$ NP} on a classical computer than on a quantum computer.
 
 \section*{Conclusion}
 \addcontentsline{toc}{section}{Conclusion}
