@@ -55,11 +55,11 @@ We will define the behavior of a quantum computer using two quantum computationa
 \tableofcontents
 
 \section{Introduction to Quantum Computers}
-A classical computer uses the \emph{bit} as a basic unit, a system which can be in exactly one of the two states \texttt{0} and \texttt{1}. Similarly, a quantum computer uses a basic unit called \emph{qubit}, which can be in a \emph{superposition} of two states. A qubit can be described as a linear combinaison of both states, each coefficient being related to the probability that the qubit is in the given state. This way, a qubit can store more information than a simple bit, by storing information for both states at a time.
+A classical computer uses the \emph{bit} as a basic unit, a system which can be in exactly one of the two states \texttt{0} and \texttt{1}. Similarly, a quantum computer uses a basic unit called \emph{qubit}, which can be in a \emph{superposition} of two states. A qubit can be described as a linear combination of both states, each coefficient being related to the probability that the qubit is in the given state. This way, a qubit can store more information than a simple bit, by storing information for both states at a time.
 
 \subsection{Dirac notation}
 While representing the state of a classical bit is quite simple, manipulating qubits requires more advanced notation. 
-The state of a qubit is often represented using the Dirac notation, also known as the Bra-ket notation.\cite{dirac-notation}.
+The state of a qubit is often represented using the Dirac notation, also known as the Bra-ket notation. \cite{dirac-notation}.
 
 A qubit of state $\Psi$ is noted $\ket{\Psi}$, and is in a superposition of the two state $\ket{0}$ and $\ket{1}$. This superposition can be written as:
 \begin{equation*}
@@ -77,7 +77,7 @@ The probability to measure the qubit in the state $\ket{0}$ (and respectively $\
 \begin{equation*}
     |\alpha|^2+|\beta|^2=1
 \end{equation*}
-since the qubit must be mesured in one on the two states.
+since the qubit must be measured in one on the two states.
 
 \begin{example}[LFCC exam]
     Assume that you have a probability $p\in[0, 1]$ of passing the next LFCC exam. Your result at the exam can be represented using one qubit in the following state:
@@ -127,7 +127,7 @@ where $0\leq\theta\leq\pi$ and $0\leq\phi<2\pi$. This parametrization of $\ket{\
     \vec{a}=\begin{pmatrix}\sin\theta\cos\phi\\\sin\theta\sin\phi\\\cos\theta\end{pmatrix}
 \end{equation*}
 
-The mesure of the qubit $\ket{\Psi}$ can be seen as the projection of this vector on either $\ket{0}$ or $\ket{1}$, i.e. on $\vec{z}$ or $-\vec{z}$. The closer the point on the sphere is to a pole, the higher the probability to be mesured in this state. When the vector is pointing directly to the top, the probability to be mesured in $\ket{0}$ is $1$; when pointing directly down, the probability is $0$, and when the vector is orthogonal to $\vec{z}$, the probability is $\frac{1}{2}$.
+The measure of the qubit $\ket{\Psi}$ can be seen as the projection of this vector on either $\ket{0}$ or $\ket{1}$, i.e. on $\vec{z}$ or $-\vec{z}$. The closer the point on the sphere is to a pole, the higher the probability to be measured in this state. When the vector is pointing directly to the top, the probability to be measured in $\ket{0}$ is $1$; when pointing directly down, the probability is $0$, and when the vector is orthogonal to $\vec{z}$, the probability is $\frac{1}{2}$.
 
 \begin{figure}[!ht]
     \centering
@@ -147,9 +147,9 @@ A \emph{quantum circuit} is the counterpart of the classical circuit; from an ab
     \caption{An example circuit (Deutsch-Jozsa's algorithm, which we will study later)}
 \end{figure}
 
-A quantum gate takes into input $n$ qubits, and modifies the probability of each qubit to be in each state. This can be seen visualy: the quantum gate changes the position of the qubit on the surface of the Bloch sphere. Therefore, quantum gates are often represented as unitary matrices of size $2^n \times 2^n$, i.e. elements of $U(2^n, \mathbb{C})$. We will now present a few basic quantum gates.
+A quantum gate takes into input $n$ qubits, and modifies the probability of each qubit to be in each state. This can be seen visually: the quantum gate changes the position of the qubit on the surface of the Bloch sphere. Therefore, quantum gates are often represented as unitary matrices of size $2^n \times 2^n$, i.e. elements of $U(2^n, \mathbb{C})$. We will now present a few basic quantum gates.
 
-\subsubsection{The \texorpdfstring{$X$}{X} Gate}
+\subsubsection{The \texorpdfstring{$X$}{ X} Gate}
 The $X$ gate is the quantum equivalent of the classical $NOT$ gate. It takes one qubit as an input, and permutes its amplitudes. Formally:
 \begin{equation*}
     X : \alpha\ket{0} + \beta\ket{1} \mapsto \beta\ket{0} + \alpha\ket{1}
@@ -162,7 +162,7 @@ The unitary matrix associated to $X$ is:
     \end{pmatrix}
 \end{equation*}
 
-\subsubsection{The \texorpdfstring{$Z$}{Z} gate}
+\subsubsection{The \texorpdfstring{$Z$}{ Z} gate}
 The $Z$ gate does not have a classical equivalent; its action over one qubit is simply to leave the $\ket{0}$ component untouched, and to multiply the $\ket{1}$ component by $-1$:
 \begin{equation*}
     Z : \alpha\ket{0} + \beta\ket{1} \mapsto \alpha\ket{0} - \beta\ket{1}
@@ -262,7 +262,7 @@ Let $\Sigma$ be an alphabet, and $L\subseteq \Sigma^\star$ a language over the a
     \end{cases*}
 \end{equation*}
 
-By analogy to this, we can define a \emph{quantum language} as a function mapping words to probabilities.\cite{quantum-automata-grammars}
+By analogy to this, we can define a \emph{quantum language} as a function mapping words to probabilities. \cite{quantum-automata-grammars}
 \begin{definition}[Quantum language]
     A quantum language over the alphabet $\Sigma$ is a function $f$ such as:
     \begin{equation*}
@@ -279,7 +279,7 @@ By analogy to this, we can define a \emph{quantum language} as a function mappin
         \item an initial normalized vector $s_{\textnormal{init}}\in H$ (i.e. $\|s_{\textnormal{init}}\|^2=1$). (This is the equivalent of the initial state in a DFA.)
         \item a subspace $H_{\textnormal{accept}} \subseteq H$, and an operator $P_{\textnormal{accept}}$ which projects onto it
         \item an alphabet $\Sigma$
-        \item a function $\delta : \Sigma \to U_n(\mathbb{C})$\footnote{$U_n(\mathbb{C})$ is the set of unitary matrices of size $n$}, mapping each letter of $a\in\Sigma$ to an unitary matrix $U_a\in\Sigma$.
+        \item a function $\delta : \Sigma \to U_n(\mathbb{C})$\footnote{$U_n(\mathbb{C})$ is the set of unitary matrices of size $n$}, mapping each letter of $a\in\Sigma$ to a unitary matrix $U_a\in\Sigma$.
     \end{enumerate}
     
     We will also write $\delta^\star(w=w_1\cdots w_{|w|}) = \delta(w_{|w|})\cdots \delta(w_1) = U_{w_{|w|}}\cdots U_{w_1}$. Finally, the language recognized by $Q$ is the following function:
@@ -289,7 +289,7 @@ By analogy to this, we can define a \emph{quantum language} as a function mappin
     (It is convenient to see the vector and matrix multiplications being computed from right to left as the word is being read by the automata.)
 \end{definition}
 
-Intuitively, we start from the $s_{\textnormal{init}}$ vector (or state), and we follow $w$ by multiplying the current vector by the matrix associated to the current letter of the input word. When the word is finished, we project the current vector (which remains of norm $1$) on the space $H_{\textnormal{accept}}$ using the operator $P_{\textnormal{accept}}$. If $\delta^\star(w)s_{\textnormal{init}}\in H_{\textnormal{accept}}$, the $P_{\textnormal{accept}}$ will left $\delta^\star(w)s_{\textnormal{init}}$ untouched, and the output probability will be $1$; otherwise, the output probability decreases as the norm projection of $\delta^\star(w)s_{\textnormal{init}}$ decreases.
+Intuitively, we start from the $s_{\textnormal{init}}$ vector (or state), and we follow $w$ by multiplying the current vector by the matrix associated to the current letter of the input word. When the word is finished, we project the current vector (which remains of norm $1$) on the space $H_{\textnormal{accept}}$ using the operator $P_{\textnormal{accept}}$. If $\delta^\star(w)s_{\textnormal{init}}\in H_{\textnormal{accept}}$, the $P_{\textnormal{accept}}$ will leave $\delta^\star(w)s_{\textnormal{init}}$ untouched, and the output probability will be $1$; otherwise, the output probability decreases as the norm projection of $\delta^\star(w)s_{\textnormal{init}}$ decreases.
 
 The end of the process corresponds to a measurement, and $f_Q(w)$ can be interpreted as the probability that this measurement has an acceptable outcome. 
 
@@ -334,7 +334,7 @@ The end of the process corresponds to a measurement, and $f_Q(w)$ can be interpr
     A \emph{Quantum Context-Free Language} is a language generated by a quantum context-free grammar.
 \end{definition}
 
-As you could have guessed, an important result on QCFL is that a quantum language is context-free if and only if it is recognized by the quantum equivalent of a push-down automata.
+As you could have guessed, an important result on QCFL is that a quantum language is context-free if and only if it is recognized by the quantum equivalent of a push-down automaton.
 
 \begin{definition}[QPDA]
     A \emph{Quantum Push-Down Automata} $Q=(H=Q\otimes \Sigma, T, Q_{\textnormal{acccept}}, s_{\textnormal{init}}, A, \delta)$ consists of:
@@ -358,7 +358,7 @@ As you could have guessed, an important result on QCFL is that a quantum languag
 \end{definition}
 
 \begin{remark}
-    Conversely to a classical PDA, transitions can depend on both the top symbol of the stack, and the symbol below it. This is because we allowed the dependency on both $\sigma_1$ and $\sigma_2$. This is necessary for the endomorphisms to be unitary. 
+    Unlike a classical PDA, transitions can depend on both the top symbol of the stack, and the symbol below it. This is because we allowed the dependency on both $\sigma_1$ and $\sigma_2$. This is necessary for the endomorphisms to be unitary. 
 \end{remark}
 
 \begin{theorem}
@@ -380,7 +380,7 @@ Similarly to the classical case, the previous constructions can be generalized t
     \item an alphabet of input and output symbols $\Sigma$
 \end{enumerate}
     
-(Note: the previous definition of a QTM restricts the head movements to $\{L, R\}$, but a generalized version $\{L, N, R\}$ can similarly be introduced. While this does not matter in term of expressivity for a classical TM, there is a difference for QTMs.)
+(Note: the previous definition of a QTM restricts the head movements to $\{L, R\}$, but a generalized version $\{L, N, R\}$ can similarly be introduced. While this does not matter in terms of expressivity for a classical TM, there is a difference for QTMs.)
 
 \end{definition}
 
@@ -458,10 +458,10 @@ This function is assumed to have a specific property: it is either \emph{constan
 \end{equation*}
 This means that either the function produces only \texttt{0}, or it produces only \texttt{1}, or it produces exactly half of \texttt{0} and half of \texttt{1}. This is the promise of the problem.
 
-The $f$ function behaves like a black box, or an \emph{oracle}: it is able to output the outcome of $f(x)$ is an single operation for any $x$. The algorithm is asked to determine whether the function is constant or balanced.
+The $f$ function behaves like a black box, or an \emph{oracle}: it is able to output the outcome of $f(x)$ in a single operation for any $x$. The algorithm is asked to determine whether the function is constant or balanced.
 
 \subsection{Classical solution}
-A deterministic computer needs in the worst case to mesure more than half the $2^n$ possible outcomes for $f$, i.e. $2^{n-1}+1$; the best time complexity is therefore exponential. Nevertheless, this problem can be solved efficiently on a probabilistic computer with a high probability.
+A deterministic computer needs in the worst case to measure more than half the $2^n$ possible outcomes for $f$, i.e. $2^{n-1}+1$; the best time complexity is therefore exponential. Nevertheless, this problem can be solved efficiently on a probabilistic computer with a high probability.
 
 \subsection{Quantum algorithm}
 We will describe the algorithm in the case $n=1$, simply known as Deutsch's algorithm. Interestingly, the same procedure simply extends to any value of $n$. 
@@ -530,7 +530,7 @@ This shows that some problems, the most famous one being the prime factoring pro
 \addcontentsline{toc}{section}{Conclusion}
 We hope that this introduction to quantum computation gave you an overall understanding how quantum computers work. The main idea emerging from the multiple approaches we took to describe a quantum computer (quantum circuits, formal languages, complexity theory) is that a quantum computer are distinct from classical computers, not necessary better in every way. We saw that some problems could be efficiently solved on a quantum computer while no efficient classical solution exist. On the other hand, building a quantum computer is a technological challenge, making -- to this day -- most problems easier to solve on classical computers.
 
-Nevertheless, the possibility of the existence of a large enough quantum computer is already starting to raise new theorical questions in multiple fields of computer science: complexity theory, with the emergence of new complexity classes; cryptography, with the search for quantum-proof cryptography algorithms, \dots 
+Nevertheless, the possibility of the existence of a large enough quantum computer is already starting to raise new theoretical questions in multiple fields of computer science: complexity theory, with the emergence of new complexity classes; cryptography, with the search for quantum-proof cryptography algorithms, \dots 
 
 \nocite{*}
 \printbibliography
