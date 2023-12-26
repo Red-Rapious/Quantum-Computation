@@ -107,9 +107,6 @@ Furthermore, we can model an action that changes the qubit's state simply by a m
 Obviously, we want $\ket{\Psi'}$ to respect the normalization condition for every qubit $\Psi$. This requires $U$ to be a unitary matrix, that is $UU^\dagger = I_2$, where $U^\dagger$ is the conjugate transpose of $U$\footnote{The conjugate transpose is usually noted $U^\star$, but I guess that quantum physicists prefer the medieval vibe of $\dagger$.}.
 
 \subsection{The Bloch sphere}
-%When dealing with simple amplitudes, like $\alpha, \beta\in [0, 1]$, the state of a qubit can be simply represented using a 1-dimensional line:
-% TODO: insert picture
-
 \begin{wrapfigure}[13]{r}{0.4\textwidth}
     \centering
     \includegraphics*{bloch-sphere}
@@ -141,7 +138,7 @@ To study the complexity of different problems with a quantum point of view, we n
 \subsection{Quantum Circuits}
 A \emph{quantum circuit} is the counterpart of the classical circuit; from an abstract point of view, it is composed of a multiple qubits, a sequence of \emph{quantum gates}, and special gates called \emph{measurements}, the quantum phenomenon which projects the qubit in one pure state. Consider the circuit below as an example. Each line of the circuit represents one qubit, and the $x$-axis represents time.
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
     \centering
     \includegraphics*[scale=0.35]{deutsch-circuit-n.png}
     \caption{An example circuit (Deutsch-Jozsa's algorithm, which we will study later)}
@@ -268,7 +265,7 @@ By analogy to this, we can define a \emph{quantum language} as a function mappin
     \begin{equation*}
         f : \Sigma^\star \to [0, 1]
     \end{equation*}
-    $f$ is a classical alphabet if $f(\Sigma^\star) \subseteq \{0, 1\}$.
+    $f$ is a classical language if $f(\Sigma^\star) \subseteq \{0, 1\}$.
 \end{definition}
 
 \subsubsection{Definition of QFAs and QRLs}
@@ -312,9 +309,9 @@ The end of the process corresponds to a measurement, and $f_Q(w)$ can be interpr
         \item an initial variable $I\in V$
         \item a finite set of productions $P$. 
     \end{itemize}
-    A \emph{production} of $P$ is of the form $\alpha\to \beta$, where $(\alpha, \beta)\in V^\star\times (T\cup V)^\star$. To each production i $P$ is associated a set of complex amplitudes $\left(c_k(\alpha\to\beta)\right)_{1\leq k\leq n}$.
+    A \emph{production} of $P$ is of the form $\alpha\to \beta$, where $(\alpha, \beta)\in V^\star\times (T\cup V)^\star$. To each production in $P$ is associated a set of complex amplitudes $\left(c_k(\alpha\to\beta)\right)_{1\leq k\leq n}$.
 
-    Consider one derivation $\alpha\Rightarrow\beta$, a chain of strings in which at each step one substring is replaced with another according to a production rule. We define the $k$-th amplitude $c_k$ of \emph{one} derivation to be the product of the $k$-th amplitudes of the derivations used in the chain. Furthermore, we define $c_k(\alpha\Rightarrow\beta)$ to be the sum of the $c_k$ for \emph{all the derivation} from $\alpha$ to $\beta$.
+    Consider one derivation $\alpha\Rightarrow\beta$, a chain of strings in which at each step one substring is replaced with another according to a production rule. We define the $k$-th amplitude $c_k$ of \emph{one} derivation to be the product of the $k$-th amplitudes of the derivations used in the chain. Furthermore, we define $c_k(\alpha\Rightarrow\beta)$ to be the product of the $c_k$'s for \emph{all the derivation} from $\alpha$ to $\beta$.
 
     The $k$-th amplitude of a word $w\in T^\star$ is defined as $c_k(w) = c_k(I\Rightarrow w)$. Finally, $G$ \emph{generates} the quantum language $f$ defined as:
     \begin{equation*}
@@ -364,10 +361,6 @@ As you could have guessed, an important result on QCFL is that a quantum languag
 \begin{theorem}
     A quantum language is a QCFL if and only if it is recognized by a QPDA.
 \end{theorem}
-
-%\begin{proof}
-%    This is merely an outline of the full proof\cite{quantum-automata-grammars}.
-%\end{proof}
 
 \subsection{Quantum Turing Machine}
 Similarly to the classical case, the previous constructions can be generalized to gain expressivity. This leads to the following definition of a Quantum Turing Machine\cite{qtm-circuits}\cite{qc-theory-bernstein}, the equivalent of a classical Turing machine, but using the previous constructions using Hilbert spaces and transition matrices:
@@ -430,11 +423,16 @@ We have BQP $\subset$ Promise-BQP. We are going to present a Promise-BQP-complet
     Any BQP problem reduces to APPROX-QCIRCUIT-PROB.
 \end{theorem}
 
-\begin{proof}
-    
-\end{proof}
-
 \subsubsection{Relationship to classical complexity classes}
+We know the following inclusions:
+\begin{equation*}
+    P \subseteq BPP \subseteq BQP \subseteq PP \subseteq PSPACE \subseteq EXP
+\end{equation*}
+Most of these proofs use APPROX-QCIRCUIT-PROB.
+
+These inclusions are interesting but simply show that a quantum computer is at least as good as a classical computer. An important question is the relationship between BQP and NP. A main reason for this is the uncertainty we have about whether P=NP. Nevertheless, it is believed that BQP contains problems that are not in P, such as integer factorization.
+
+Furthermore, it has been recently proven\cite{oracle-bqp-ph} that there is an oracle relative to which BQP is not contained in PH, the polynomial hierarchy, which would suggest -- but not prove -- that $BQP \nsubseteq PH$.
 
 
 \subsection{Relationship to the Church-Turing Thesis}
@@ -485,7 +483,7 @@ The implementation of the function $f$ is assumed to be of the form:
 This is needed to ensure that the gate is unitary.
 
 The algorithm uses two qubits. Its circuit representation is the following:
-\begin{figure}[!h]
+\begin{figure}[!ht]
     \centering
     \includegraphics*[scale=0.4]{deutsch-circuit.png}
     \caption{The quantum circuit used by Deutsch's algorithm}
@@ -519,7 +517,7 @@ Note that we will only measure the first qubit.\footnote{The second qubit is kno
 \subsection{General case}
 The ideas for the general case of the Deutsch-Jozsa algorithm are the exact same as the ones in the Deutsch algorithm. The main change is to replace the first qubit by a bus of $n$ qubits:
 
-\begin{figure}[!h]
+\begin{figure}[!ht]
     \centering
     \includegraphics*[scale=0.4]{deutsch-circuit-n.png}
     \caption{The quantum circuit used by Deutsch-Jozsa's algorithm in the general case}
