@@ -220,7 +220,7 @@ The set of gates above lack expressivity, since they operate on a single qubit o
     \begin{equation*}
         \ket{\Psi\Phi} = \frac{1}{\sqrt{2}} \left(\ket{00}+\ket{11}\right)
     \end{equation*}
-    Where the only possible outcomes are $(0, 0)$ and $(1, 1)$. By measuring $\Psi$, we can deduct the "value" of $\Phi$, exactly as if it was measured, which breaks the quantum superposition phenomenon.
+    Where the only possible outcomes are $(0, 0)$ and $(1, 1)$. By measuring $\Psi$, we can deduct the "value" of $\Phi$, exactly as if it was measured, which breaks the quantum superposition phenomenon, no matter the distance between both qubits.\footnote{This is what Einstein called "spooky action at a distance"}
 \end{example}
 
 \subsubsection{CNOT gate}
@@ -372,15 +372,27 @@ As you could have guessed, an important result on QCFL is that a quantum languag
 \subsection{Quantum Turing Machine}
 Similarly to the classical case, the previous constructions can be generalized to gain expressivity. This leads to the following definition of a Quantum Turing Machine\cite{qtm-circuits}\cite{qc-theory-bernstein}, the equivalent of a classical Turing machine, but using the previous constructions using Hilbert spaces and transition matrices:
 
-\begin{definition}[QTM] A \emph{Quantum Turing Machine} (or QTM) $M = (H, \Gamma, b, \Sigma, \delta, q_0, F)$ consists of:
+\begin{definition}[QTM] A \emph{Quantum Turing Machine} (or QTM) $M = (H, \Gamma, b, \Sigma, \delta, q_0, Q_{\textnormal{accept}})$ consists of:
 \begin{enumerate}[label=--, noitemsep]
-    \item a Hilbert space $H$ (replacing the classical set of states $Q$)
+    \item a Hilbert space $Q$ (replacing the classical set of states $Q$)
     \item another Hilbert space $\Gamma$ (replacing the classical set of tape symbols)
     \item a blank symbol $b\in \Gamma$
     \item an alphabet of input and output symbols $\Sigma$
+    \item an initial set $q_0\in Q$
+    \item a subset $Q_{\textnormal{accept}}\subseteq Q$ of accepting states (and, as usual, an operator $P_{\textnormal{accept}}$ which projects onto it)
+    \item a transition function $\delta$ such as:
+    \begin{equation*}
+        \delta : \Sigma \times Q\otimes \Gamma \to \Sigma \times Q\otimes \Gamma \times \{L, R\}
+    \end{equation*}
+    An interpretation of this transition function is that to each letter of $\Sigma$ is associated an automorphism of $Q\otimes \Gamma$, which changes the state of the machine and the tape. 
+
+    Like a classical TM, this QTM is given an infinite tape indexed by $\mathbb{Z}$, on which the head can read, write, and move left or right.
+
 \end{enumerate}
-    
-(Note: the previous definition of a QTM restricts the head movements to $\{L, R\}$, but a generalized version $\{L, N, R\}$ can similarly be introduced. While this does not matter in terms of expressivity for a classical TM, there is a difference for QTMs.)
+
+\begin{remark}
+    There is different common definitions of the classical Turing machine, but they are all pretty similar; the differences are often about whether the head can stay in place, whether the tape is indexed by $\mathbb{N}$ or $\mathbb{Z}$, etc. In the case of a quantum Turing machine, many definitions coexist, with major differences in the handling of the tape, the measurement, and the output. The main idea to use unitary matrices to transform both the Hilbert space $Q$ and the tape was introducted by Deutsch in \cite{deutsch-qtm}. Since this first publication, another definition by Bernstein and Vazirani in \cite{qc-theory-bernstein} has been vastly used for quantum complexity theory. Recent papers, such as \cite{guerrini}, try to unify these two standard approaches of QTM, but no clear standard definition of a QTM has emerged. The definition given above is more of a sketch of a definition which tries to unify both approaches.
+\end{remark}
 
 \end{definition}
 
