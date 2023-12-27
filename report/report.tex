@@ -296,10 +296,28 @@ The end of the process corresponds to a measurement, and $f_Q(w)$ can be interpr
 \end{definition}
 
 \subsubsection{A few properties of QRLs}
+Interestingly enough, QRLs inherit some properties from classical regular languages, like closure properties and an equivalent of the pumping lemma.
+
+% TODO: closure
+\begin{theorem}[Closure of QRLs by product]
+    Let $f, g$ be QRLs. Then the product $fg$ is a QRL.
+\end{theorem}
+
+\begin{remark}
+    In the context of to classical languages $L_1$ and $L_2$, the product $\chi_{L_1}\chi_{L_2}$ corresponds to the intersection $L_1\cap L_2$. Recall that if $L_1$ and $L_2$ are regular languages, $L_1\cap L_2$ is also regular.
+\end{remark}
+
+\begin{theorem}[Closure of QRLs by linear combination]
+    Let $f_i$ be QRLs, and $c_i$ be constants such as $\sum_i c_i \leq 1$. Then, $\sum_i c_if_i$ is a QRL.
+\end{theorem}
+
+A powerful result to show that a language is not a (classical) regular language is the pumping lemma. Quantum regular languages have a similar result, which is the following:
 \begin{theorem}[Quantum Pumping Lemma]
     If $f$ is a QRL, then for any word $w\in\Sigma^\star$ and any $\varepsilon > 0$, there is a $k\in \mathbb{N}^\star$ such that $\|f(uw^kv) - f(uv)\| < \varepsilon$ for any words $u, v$. Moreover, if $f$'s automaton is $n$-dimensional, there is a constant $c$ independent of $\varepsilon$ such that $k < (c\varepsilon)^{-n}$.
 \end{theorem}
-%This version of the pumping lemma is stronger than the classical property of regular languages. Note that if we choose $f$ to be a classical language (i.e. $f(\Sigma^\star)\subseteq \{0, 1\}$), by choosing $\varepsilon=\frac{1}{2}$, 
+The idea mimics the behavior of an irrational rotation of a circle; for every word $w$, there is a $k$ such as applying $w$ $k$ times (which is like applying a rotation to the state) brings us back within a distance of at most $\varepsilon$ from the word $uv$ from which we started.
+
+This result can be used to show that the regular language of words over $\Sigma=\{a, b\}$ which do not contain the subword $bb$ is not a quantum regular language \cite{quantum-automata-grammars}.
 
 \subsection{Quantum context-free languages}
 \begin{definition}[Quantum Grammar\footnote{\url{https://xkcd.com/1090/}}]
