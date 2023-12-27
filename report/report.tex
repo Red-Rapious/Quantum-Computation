@@ -200,7 +200,7 @@ meaning that a qubit starting in a \emph{pure} state ($\ket{0}$ or $\ket{1}$) is
 
 If we consider the circuit \ref{fig:basic-circuit} on the left, the probability to measure $\ket{0}$ is exactly $\frac{1}{2}$. (Note that this is possibly the only method to have true random numbers.) If we were to replace the initial state of the qubit from $\ket{0}$ to $\ket{1}$. Similarly, if we were to modify the circuit to add an $X$ gate between the Hadamard gate and the measuring "gate", the outputs probabilities would not change. 
 
-Note that like every quantum gate represented by an unitary matrix, and unlike many classical gates, the Hadamard gate is reversible. This might seem counter-intuitive since the previous example suggests that we "lost" the information on the qubit. 
+Note that like every quantum gate represented by a unitary matrix, and unlike many classical gates, the Hadamard gate is reversible. This might seem counter-intuitive since the previous example suggests that we "lost" the information on the qubit. 
 
 \begin{remark}
     Similarly to $XOR$, which can be constructed using only $AND$ and $OR$, the gates presented above are not "independent": it is possible\footnote{The proof is left as an exercise to the reader} to construct the $X$ gate using only $Z$ and $H$ gates.
@@ -298,7 +298,6 @@ The end of the process corresponds to a measurement, and $f_Q(w)$ can be interpr
 \subsubsection{A few properties of QRLs}
 Interestingly enough, QRLs inherit some properties from classical regular languages, like closure properties and an equivalent of the pumping lemma.
 
-% TODO: closure
 \begin{theorem}[Closure of QRLs by product]
     Let $f, g$ be QRLs. Then the product $fg$ is a QRL.
 \end{theorem}
@@ -408,7 +407,7 @@ Similarly to the classical case, the previous constructions can be generalized t
 \end{enumerate}
 
 \begin{remark}
-    There is different common definitions of the classical Turing machine, but they remain all quite similar; the differences are often about whether the head can stay in place, whether the tape is indexed by $\mathbb{N}$ or $\mathbb{Z}$, etc. In the case of a quantum Turing machine, many definitions coexist, with major differences in the handling of the tape, the measurement, and the output. The main idea to use unitary matrices to transform both the Hilbert space $Q$ and the tape was introducted by Deutsch in \cite{deutsch-qtm}. Since this first publication, another definition by Bernstein and Vazirani in \cite{qc-theory-bernstein} has been vastly used for quantum complexity theory. Recent papers, such as \cite{guerrini}, try to unify these two standard approaches of QTM, but no clear standard definition of a QTM has emerged. The definition given above is more of a sketch of a definition which tries to unify both approaches.
+    There is different common definitions of the classical Turing machine, but they remain all quite similar; the differences are often about whether the head can stay in place, whether the tape is indexed by $\mathbb{N}$ or $\mathbb{Z}$, etc. In the case of a quantum Turing machine, many definitions coexist, with major differences in the handling of the tape, the measurement, and the output. The main idea to use unitary matrices to transform both the Hilbert space $Q$ and the tape was introduced by Deutsch in \cite{deutsch-qtm}. Since this first publication, another definition by Bernstein and Vazirani in \cite{qc-theory-bernstein} has been vastly used for quantum complexity theory. Recent papers, such as \cite{guerrini}, try to unify these two standard approaches of QTM, but no clear standard definition of a QTM has emerged. The definition given above is more of a sketch of a definition which tries to unify both approaches.
 \end{remark}
 
 \end{definition}
@@ -469,7 +468,7 @@ Furthermore, it has been recently proven\cite{oracle-bqp-ph} that there is an or
 
 
 \subsection{Relationship to the Church-Turing Thesis}
-Some non-computer-scientists might tend to think that quantum computers are able to "do things that no traditionnal computer can". While we will see that this remains false in theory, the emergence of quantum computers questionned the possibilities of computation and efficient computation. Recall the Church-Turing thesis:
+Some non-computer-scientists might tend to think that quantum computers are able to "do things that no traditional computer can". While we will see that this remains false in theory, the emergence of quantum computers questioned the possibilities of computation and efficient computation. Recall the Church-Turing thesis:
 \begin{thesis}[Church-Turing Thesis]
     A function on the natural numbers can be calculated by an effective method if and only if it is computable by a Turing machine.
 \end{thesis}
@@ -549,7 +548,7 @@ Note that we will only measure the first qubit.\footnote{The second qubit is kno
 \end{enumerate}
 
 \subsection{General case}
-The ideas for the general case of the Deutsch-Jozsa algorithm are the exact same as the ones in the Deutsch algorithm. The main change is to replace the first qubit by a bus of $n$ qubits:
+The ideas for the general case of the Deutsch-Jozsa algorithm are the exact same as the ones in Deutsch's algorithm. The main change is to replace the first qubit by a bus of $n$ qubits:
 
 \begin{figure}[!ht]
     \centering
@@ -577,7 +576,7 @@ We hope that this introduction to quantum computation gave you an overall unders
 Nevertheless, the possibility of the existence of a large enough quantum computer is already starting to raise new theoretical questions in multiple fields of computer science: complexity theory, with the emergence of new complexity classes; cryptography, with the search for quantum-proof cryptography algorithms, \dots The theoretical interest of quantum computation might not be what they \emph{can} do, but instead the search of what they \emph{cannot}.
 
 \paragraph*{End word}
-Thank you for reading this far; if this interested you and you want to know more about this broad topic, I recommend reading:
+Thank you for reading this far; if this interested you, and you want to know more about this broad topic, I recommend reading:
 \begin{itemize}[label=--, noitemsep]
     \item \cite{introduction-quantum-complexity} for more circuit-based complexity.
     \item \cite{quantum-applied} for an easy and applied approach of quantum computing
