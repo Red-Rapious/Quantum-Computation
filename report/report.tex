@@ -40,7 +40,7 @@
 
 \title{\vspace{-5ex} \textbf{Quantum Computation:\\a formal introduction}}
 \author{Antoine Groudiev}
-\date{\vspace{-1ex}\today}
+\date{\vspace{-1ex}Last updated \today}
 \markright{Antoine Groudiev}{}
 \pagestyle{myheadings}
 
@@ -277,7 +277,7 @@ By analogy to this, we can define a \emph{quantum language} as a function mappin
         \item an initial normalized vector $s_{\textnormal{init}}\in H$ (i.e. $\|s_{\textnormal{init}}\|^2=1$). (This is the equivalent of the initial state in a DFA.)
         \item a subspace $H_{\textnormal{accept}} \subseteq H$, and an operator $P_{\textnormal{accept}}$ which projects onto it
         \item an alphabet $\Sigma$
-        \item a function $\delta : \Sigma \to U_n(\mathbb{C})$\footnote{$U_n(\mathbb{C})$ is the set of unitary matrices of size $n$}, mapping each letter of $a\in\Sigma$ to a unitary matrix $U_a\in\Sigma$.
+        \item a function $\delta : \Sigma \to U_n(\mathbb{C})$\footnote{$U_n(\mathbb{C})$ is the set of unitary matrices of size $n$}, mapping each letter of $a\in\Sigma$ to a unitary matrix $U_a\in U_n(\mathbb{C})$.
     \end{enumerate}
     
     We will write $\delta^\star(w=w_1\cdots w_{|w|}) = \delta(w_{|w|})\cdots \delta(w_1) = U_{w_{|w|}}\cdots U_{w_1}$. Finally, the language recognized by $Q$ is the following function:
