@@ -45,34 +45,29 @@
 \title{\textbf{Calcul et informatique quantique:\\une introduction formelle}}
 \author{Antoine Groudiev}
 \institute{ENS Ulm}
-\date{Janvier 2024}
+\date{18 Janvier 2024}
 
 \begin{document}
 \frame{\titlepage}
 
-\begin{frame}
-    \frametitle{Plan}
+\begin{frame}{Plan}
     \tableofcontents
 \end{frame}
 
 \section{Introduction à l'informatique quantique}
-\begin{frame}
-    \frametitle{Introduction}
+\begin{frame}{Introduction}
 \end{frame}
 
 \subsection{Notation de Dirac}
-\begin{frame}
-    \frametitle{Notation de Dirac}
+\begin{frame}{Notation de Dirac}
 \end{frame}
 
 \subsection{Représentation vectorielle}
-\begin{frame}
-    \frametitle{Représentation vectorielle}
+\begin{frame}{Représentation vectorielle}
 \end{frame}
 
 \subsection{Sphère de Bloch}
-\begin{frame}
-    \frametitle{Visualisation avec la sphère de Bloch}
+\begin{frame}{Visualisation avec la sphère de Bloch}
     \begin{figure}[!h]
         \centering
         \includegraphics{bloch-sphere}
@@ -82,38 +77,31 @@
 
 \section{Modèles de calculabilité quantique}
 \subsection{Circuits quantiques}
-\begin{frame}
-    \frametitle{Circuits quantiques}
+\begin{frame}{Circuits quantiques}
     \begin{figure}[!ht]
         \centering
-        \includegraphics[scale=0.4]{deutsch-circuit-n.png}
+        \includegraphics[scale=0.5]{deutsch-circuit-n.png}
         \caption{Un exemple de circuit (Algorithme de Deutsch-Jozsa)}
     \end{figure}
 \end{frame}
 
-\begin{frame}
-    \frametitle{Porte $X$}
+\begin{frame}{Porte $X$}
 \end{frame}
 
-\begin{frame}
-    \frametitle{Porte $Z$}
+\begin{frame}{Porte $Z$}
 \end{frame}
 
-\begin{frame}
-    \frametitle{Porte de Hadamard}
+\begin{frame}{Porte de Hadamard}
 \end{frame}
 
-\begin{frame}
-    \frametitle{Intrication quantique}
+\begin{frame}{Intrication quantique}
 \end{frame}
 
-\begin{frame}
-    \frametitle{Porte $CNOT$}
+\begin{frame}{Porte $CNOT$}
 \end{frame}
 
 \subsection{Langages, automates, grammaires quantiques}
-\begin{frame}
-    \frametitle{Langage quantique}
+\begin{frame}{Langage quantique}
     \framesubtitle{Retour sur les langages classiques}
     Soit $\Sigma$ un alphabet, et $L\subseteq \Sigma^\star$ un langage. $L$ peut être défini alternativement comme un sous-ensemble de $\Sigma^\star$, ou par sa fonction caractéristique $\chi_L$:
     \begin{equation*}
@@ -124,8 +112,7 @@
     \end{equation*}
 \end{frame}
 
-\begin{frame}
-    \frametitle{Langage quantique}
+\begin{frame}{Langage quantique}
     \framesubtitle{Définition}
     On peut par analogie définir un \emph{langage quantique} comme une fonction associant des probabilités à des mots:
     \begin{definition}[Langage quantique]
@@ -141,8 +128,7 @@
     \end{remark}
 \end{frame}
 
-\begin{frame}
-    \frametitle{Automate quantique fini}
+\begin{frame}{Automate quantique fini}
     \begin{definition}[AQF]
         Un \emph{Automate Quantique Fini} $\mathcal{A}=(H, s_{\textnormal{init}}, H_{\textnormal{accept}}, P_{\textnormal{accept}}, \Sigma, \delta)$ constiste en:
         \begin{enumerate}[label=--, noitemsep]
@@ -160,8 +146,7 @@
     \end{definition}
 \end{frame}
 
-\begin{frame}
-    \frametitle{Langage quantique régulier et propriétés}
+\begin{frame}{Langage quantique régulier et propriétés}
     \begin{definition}[LQR]
         Un \emph{Langage Quantique Régulier} est un langage quantique reconnu par un automate quantique fini
     \end{definition}
@@ -175,15 +160,13 @@
     \end{theorem}
 \end{frame}
 
-\begin{frame}
-    \frametitle{Langage quantique régulier et propriétés}
+\begin{frame}{Langage quantique régulier et propriétés}
     \begin{theorem}[Lemme de pompage quantique]
         Si $f$ est un LQR, alors pour tout mot $w\in\Sigma^\star$ et tout $\varepsilon > 0$, il existe $k\in \mathbb{N}^\star$ tel que $\|f(uw^kv) - f(uv)\| < \varepsilon$ pour tout mots $u, v$. De plus, si l'automate de $f$ est de dimension $n$, alors il existe une constante $c$ (indépendante de $\varepsilon$) telle que $k < (c\varepsilon)^{-n}$.
     \end{theorem}
 \end{frame}
 
-\begin{frame}
-    \frametitle{Grammaire quantique hors-contexte}
+\begin{frame}{Grammaire quantique hors-contexte}
     \begin{definition}[Grammaire\footnote{\url{https://xkcd.com/1090/}} Quantique Hors-Contexte]
         Une \emph{Grammaire Quantique Hors-Contexte} $G=(V, T, I, P)$ de \emph{dimensionnalité} $n$ consiste en:
         \begin{itemize}[label=--, noitemsep]
@@ -215,8 +198,7 @@
     \end{equation*}
 \end{frame}
 
-\begin{frame}
-    \frametitle{Automate à pile quantique}
+\begin{frame}{Automate à pile quantique}
     \begin{definition}[QPDA]
         Un \emph{Automate à Pile Quantique} $\mathcal{A}=(H=Q\otimes \Sigma, \Gamma, Q_{\textnormal{acccept}}, s_{\textnormal{init}}, A, \delta)$ consiste en:
         \begin{itemize}[label=--, noitemsep]
@@ -229,8 +211,8 @@
         \end{itemize}
     \end{definition}
 \end{frame}
-\begin{frame}
-    \frametitle{Automate à pile quantique}
+
+\begin{frame}{Automate à pile quantique}
     \framesubtitle{(Suite)}
     Pour s'assurer du comportement LIFO de la pile, on ajoute les contraintes suivantes:
     Soient $q_1, q_2\in Q$ des états de contrôle, et $\sigma_1, \sigma_2\in \Gamma$ des états de la pile; l'amplitude de la transition $(q_1, \sigma_1)$ to $(q_2, \sigma_2)$ est non-nulle seulement s'il existe $t\in T$ tel que:
@@ -245,15 +227,13 @@
     \end{equation*}
 \end{frame}
 
-\begin{frame}
-    \frametitle{Théorème d'équivalence}
+\begin{frame}{Théorème d'équivalence}
     \begin{theorem}[Équivalence entre GQHC et APQ]
         Un langage quantique est généré par une grammaire quantique hors-contexte si et seulement si il est reconnu par un automate à pile quantique.
     \end{theorem}
 \end{frame}
 
-\begin{frame}
-    \frametitle{Machine de Turing quantique}
+\begin{frame}{Machine de Turing quantique}
     \begin{definition}[MTQ] Une \emph{Machine de Turing Quantique} $M = (H, \Gamma, b, \Sigma, \delta, q_0, Q_{\textnormal{accept}})$ consiste en:
         \begin{enumerate}[label=--, noitemsep]
             \item un espace de Hilbert $Q$ des états
@@ -272,15 +252,13 @@
 
 \section{Théorie de la complexité quantique}
 \subsection{Classe BQP}
-\begin{frame}
-    \frametitle{Classe BQP (Bounded-error Quantum Polynomial time)}
+\begin{frame}{Classe BQP (Bounded-error Quantum Polynomial time)}
     \begin{definition}[BQP] 
         La classe \emph{Bounded-error Quantum Polynomial time} (BQP) est l'ensemble des problèmes de décision qui peuvent être résolus en temps polynomial par une machine de Turing quantique, avec une erreur maximale de $\frac{1}{3}$. 
     \end{definition}
 \end{frame}
 
-\begin{frame}
-    \frametitle{Un problème Promise-BQP-complet}
+\begin{frame}{Un problème Promise-BQP-complet}
     \begin{definition}[Problème APPROX-QCIRCUIT-PROB]
         \textsc{Entrée}: $\alpha, \beta$ tels que $0\leq\beta<\alpha\leq 1$, et la description d'un circuit quantique $C$ tel que:
         \begin{itemize}[label=--, noitemsep]
@@ -297,8 +275,7 @@
     \end{theorem}
 \end{frame}
 
-\begin{frame}
-    \frametitle{Positionnement par rapport aux classes de complexité classiques}
+\begin{frame}{Positionnement par rapport aux classes de complexité classiques}
     \begin{figure}[!ht]
         \centering
         \includegraphics[scale=0.35]{bqp-inclusions.png}
@@ -307,8 +284,7 @@
 \end{frame}
 
 \subsection{Rapport à la thèse de Church-Turing}
-\begin{frame}
-    \frametitle{Rapport à la thèse de Church-Turing}
+\begin{frame}{Rapport à la thèse de Church-Turing}
     \begin{thesis}[Thèse de Church-Turing]
         Une fonction sur les entiers naturels peut être calculée si et seulement si elle est calculable par une machine de Turing.
     \end{thesis}
@@ -321,20 +297,44 @@
 \end{frame}
 
 \section{Algorithme de Deutsch-Jozsa}
-\begin{frame}
-    \frametitle{Description du problème}
+\begin{frame}{Description du problème}
+    On considère une fonction $f$ fonctionnant sur $n$ bits ou qubits:
+    \begin{equation*}
+        f : \{ 0, 1 \}^n \to \{ 0, 1 \}
+    \end{equation*}
+    Cette fonction est supposée être soit \emph{constante}, soit \emph{équilibrée}:
+    \begin{equation*}
+        |f^{-1}(\{0\})| = n \lor |f^{-1}(\{1\})| = n \lor \left(|f^{-1}(\{0\})| = |f^{-1}(\{1\})| = \frac{n}{2}\right)
+    \end{equation*}
+    (C'est à dire qu'elle produit soit que des \texttt{0}, soit que des \texttt{1}, soit exactement la moitié de \texttt{0} et l'autre moitié de \texttt{1}.)
 \end{frame}
 
-\begin{frame}
-    \frametitle{Solution classique optimale}
+\begin{frame}{Solution classique}
+    Dans le pire cas, un algorithme classique déterministe doit mesurer plus de la moitié des valeurs de $f$ pour les $2^n$ valeurs entrées possibles, i.e. $2^{n-1}+1$; la meilleure complexité en temps est dès lors exponentielle. (Néanmoins, ce problème peut être résolu avec une probabilité élevée avec un algorithme probabiliste, le problème est donc dans $BPP$.)
 \end{frame}
 
-\begin{frame}
-    \frametitle{Algorithme de Deutsch}
+\begin{frame}{Algorithme de Deutsch}
+    On suppose que $f$ est implémentée par une porte sous la forme:
+    \begin{equation*}
+        f : \ket{x}\ket{y} \mapsto \ket{x}\ket{f(x)\oplus y}
+    \end{equation*}
+    \begin{figure}[!ht]
+        \centering
+        \includegraphics[scale=0.4]{deutsch-circuit.png}
+        \caption{Circuit de l'algorithme de Deutsch}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Algorithme de Deutsch}
 \end{frame}
 
 \begin{frame}
     \frametitle{Cas général ($n$ quelconque)}
+    \begin{figure}[!ht]
+        \centering
+        \includegraphics[scale=0.5]{deutsch-circuit-n.png}
+        \caption{Circuit de l'algorithme de Deutsch}
+    \end{figure}
 \end{frame}
 
 \end{document}
