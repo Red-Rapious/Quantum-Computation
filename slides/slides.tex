@@ -75,7 +75,7 @@
     \end{figure}
 \end{frame}
 
-\section{Modèles de calculabilité quantique}
+\section{Modèles de calcul quantiques}
 \subsection{Circuits quantiques}
 \begin{frame}{Circuits quantiques}
     \begin{figure}[!ht]
@@ -86,19 +86,58 @@
 \end{frame}
 
 \begin{frame}{Porte $X$}
+    \begin{equation*}
+        X : \alpha\ket{0} + \beta\ket{1} \mapsto \beta\ket{0} + \alpha\ket{1}
+    \end{equation*}
+    Sous forme de matrice:
+    \begin{equation*}
+        X \cong \begin{pmatrix}
+            0&1\\
+            1&0
+        \end{pmatrix}
+    \end{equation*}
 \end{frame}
 
 \begin{frame}{Porte $Z$}
+    \begin{equation*}
+        Z : \alpha\ket{0} + \beta\ket{1} \mapsto \alpha\ket{0} - \beta\ket{1}
+    \end{equation*}
+    Sous forme de matrice:
+    \begin{equation*}
+        Z \cong \begin{pmatrix}
+            1&0\\
+            0&-1
+        \end{pmatrix}
+    \end{equation*}
 \end{frame}
 
 \begin{frame}{Porte de Hadamard}
+    \begin{equation*}
+        H \cong \frac{1}{\sqrt{2}}
+        \begin{pmatrix}
+            1&1\\
+            1&-1
+        \end{pmatrix}
+    \end{equation*}
+    Résultat direct:
+    \begin{equation*}
+        \begin{cases}
+            H\ket{0} = \frac{1}{\sqrt{2}}(\ket{0}+\ket{1}) \\
+            H\ket{1} = \frac{1}{\sqrt{2}}(\ket{0}-\ket{1})
+        \end{cases}
+    \end{equation*}
+    \begin{figure}
+        \label{fig:basic-circuit}
+        \centering
+        \includegraphics[scale=0.3]{basic-circuit.png}
+    \end{figure}
 \end{frame}
 
-\begin{frame}{Intrication quantique}
-\end{frame}
-
-\begin{frame}{Porte $CNOT$}
-\end{frame}
+%\begin{frame}{Intrication quantique}
+%\end{frame}
+%
+%\begin{frame}{Porte $CNOT$}
+%\end{frame}
 
 \subsection{Langages, automates, grammaires quantiques}
 \begin{frame}{Langage quantique}
@@ -130,7 +169,7 @@
 
 \begin{frame}{Automate quantique fini}
     \begin{definition}[AQF]
-        Un \emph{Automate Quantique Fini} $\mathcal{A}=(H, s_{\textnormal{init}}, H_{\textnormal{accept}}, P_{\textnormal{accept}}, \Sigma, \delta)$ constiste en:
+        Un \emph{Automate Quantique Fini} $\mathcal{A}=(H, s_{\textnormal{init}}, H_{\textnormal{accept}}, P_{\textnormal{accept}}, \Sigma, \delta)$ consiste en:
         \begin{enumerate}[label=--, noitemsep]
             \item un espace de Hilbert $H$ de dimension $n$
             \item un vecteur initial normalisé $s_{\textnormal{init}}\in H$ (i.e. $\|s_{\textnormal{init}}\|^2=1$)
@@ -326,6 +365,11 @@
 \end{frame}
 
 \begin{frame}{Algorithme de Deutsch}
+    L'état du premier qubit est finalement:
+    \begin{equation*}
+        \frac{1}{2} \big[ \big(1+(-1)^{f(0)\oplus f(1)}\big)\ket{0} + \big(1-(-1)^{f(0)\oplus f(1)}\big)\ket{1} \big]
+    \end{equation*}
+    qui vaut $\ket{0}$ si et seulement $f(0)\oplus f(1) = 0$.
 \end{frame}
 
 \begin{frame}
