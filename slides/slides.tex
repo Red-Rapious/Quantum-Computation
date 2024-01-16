@@ -54,28 +54,25 @@
     \tableofcontents
 \end{frame}
 
-\section{Introduction à l'informatique quantique}
-\begin{frame}{Introduction}
-\end{frame}
-
-\subsection{Notation de Dirac}
-\begin{frame}{Notation de Dirac}
-\end{frame}
-
-\subsection{Représentation vectorielle}
-\begin{frame}{Représentation vectorielle}
-\end{frame}
-
-\subsection{Sphère de Bloch}
-\begin{frame}{Visualisation avec la sphère de Bloch}
-    \begin{figure}[!h]
-        \centering
-        \includegraphics{bloch-sphere}
-        \caption{Sphère de Bloch}
-    \end{figure}
-\end{frame}
-
 \section{Modèles de calcul quantiques}
+
+\subsection{Introduction à l'informatique quantique}
+\begin{frame}{Introduction}
+    On manipule non pas des \emph{bits}, mais des \emph{qubits}.
+    \begin{definition}[Superposition quantique]        
+        \begin{equation*}
+            \ket{\Psi}=\alpha\ket{\Psi}+\beta\ket{\Psi}
+        \end{equation*}
+        où $\alpha, \beta\in \mathbb{C}$ sont appelés les \emph{amplitudes d'états}. 
+    \end{definition}
+
+    \begin{remark}[Condition de normalisation]
+        \begin{equation*}
+        |\alpha|^2+|\beta|^2=1
+        \end{equation*}
+    \end{remark}
+\end{frame}
+
 \subsection{Circuits quantiques}
 \begin{frame}{Circuits quantiques}
     \begin{figure}[!ht]
@@ -98,18 +95,18 @@
     \end{equation*}
 \end{frame}
 
-\begin{frame}{Porte $Z$}
-    \begin{equation*}
-        Z : \alpha\ket{0} + \beta\ket{1} \mapsto \alpha\ket{0} - \beta\ket{1}
-    \end{equation*}
-    Sous forme de matrice:
-    \begin{equation*}
-        Z \cong \begin{pmatrix}
-            1&0\\
-            0&-1
-        \end{pmatrix}
-    \end{equation*}
-\end{frame}
+%\begin{frame}{Porte $Z$}
+%    \begin{equation*}
+%        Z : \alpha\ket{0} + \beta\ket{1} \mapsto \alpha\ket{0} - \beta\ket{1}
+%    \end{equation*}
+%    Sous forme de matrice:
+%    \begin{equation*}
+%        Z \cong \begin{pmatrix}
+%            1&0\\
+%            0&-1
+%        \end{pmatrix}
+%    \end{equation*}
+%\end{frame}
 
 \begin{frame}{Porte de Hadamard}
     \begin{equation*}
@@ -185,92 +182,92 @@
     \end{definition}
 \end{frame}
 
-\begin{frame}{Langage quantique régulier et propriétés}
-    \begin{definition}[LQR]
-        Un \emph{Langage Quantique Régulier} est un langage quantique reconnu par un automate quantique fini
-    \end{definition}
-
-    \begin{theorem}[Clôture des LQR par produit]
-        Soient $f, g$ des LQRs. Alors, le produit $fg$ est un LQR.
-    \end{theorem}
-
-    \begin{theorem}[Clôture des LQR par combinaison linéaire]
-        Soient $f_i$ des LQRs, et $c_i$ des constantes telles que $\sum_i c_i \leq 1$. Alors, $\sum_i c_if_i$ est un LQR.
-    \end{theorem}
-\end{frame}
-
-\begin{frame}{Langage quantique régulier et propriétés}
-    \begin{theorem}[Lemme de pompage quantique]
-        Si $f$ est un LQR, alors pour tout mot $w\in\Sigma^\star$ et tout $\varepsilon > 0$, il existe $k\in \mathbb{N}^\star$ tel que $\|f(uw^kv) - f(uv)\| < \varepsilon$ pour tout mots $u, v$. De plus, si l'automate de $f$ est de dimension $n$, alors il existe une constante $c$ (indépendante de $\varepsilon$) telle que $k < (c\varepsilon)^{-n}$.
-    \end{theorem}
-\end{frame}
-
-\begin{frame}{Grammaire quantique hors-contexte}
-    \begin{definition}[Grammaire\footnote{\url{https://xkcd.com/1090/}} Quantique Hors-Contexte]
-        Une \emph{Grammaire Quantique Hors-Contexte} $G=(V, T, I, P)$ de \emph{dimensionnalité} $n$ consiste en:
-        \begin{itemize}[label=--, noitemsep]
-            \item un alphabet $V$ de variables
-            \item un alphabet $T$ de terminaux
-            \item une variable initiale $I\in V$
-            \item un ensemble fini de productions $P$ de la forme $\alpha\to \beta$, où $(\alpha, \beta)\in V\times (T\cup V)^\star$.
-        \end{itemize}
-        
-    \end{definition}
-\end{frame}
-
-\begin{frame}
-    À chaque production de $P$ est associée un ensemble d'amplitudes complexes $\left(c_k(\alpha\to\beta)\right)_{1\leq k\leq n}$.
-    
-    On définit l'amplitude d'\emph{une} suite de productions:
-    \begin{equation*}
-        c_k(\alpha_1 \to \dots \to \alpha_m=\beta) := \prod_{i=1}^{m-1} c_k(\alpha_i\to\alpha_{i+1})
-    \end{equation*}
-
-    Et l'amplitude d'une dérivation:
-    \begin{equation*}
-        c_k(\alpha\Rightarrow\beta) := \sum_{\alpha=\alpha_1 \to \dots \to \alpha_m=\beta} c_k(\alpha_1 \to \dots \to \alpha_m)
-    \end{equation*}
-
-    Enfin, $G$ \emph{génère} le langage quantique $f$ définit par:
-    \begin{equation*}
-        f(w) = \sum_{k=1}^n \|c_k(I\Rightarrow w)\|^2
-    \end{equation*}
-\end{frame}
-
-\begin{frame}{Automate à pile quantique}
-    \begin{definition}[QPDA]
-        Un \emph{Automate à Pile Quantique} $\mathcal{A}=(H=Q\otimes \Sigma, \Gamma, Q_{\textnormal{acccept}}, s_{\textnormal{init}}, A, \delta)$ consiste en:
-        \begin{itemize}[label=--, noitemsep]
-            \item un espace de Hilbertt $H$ des configurations de $\mathcal{A}$, avec $H=Q\otimes \Sigma$ pour $Q$, $\Sigma$
-            \item chaque vecteur de base de $\Sigma$ est un mot fini de \emph{l'alphabet de pile} $\Gamma$
-            \item un état initial $s_{\textnormal{init}}$
-            \item $Q_{\textnormal{acccept}} \subseteq Q$, tel que $H_{\textnormal{acccept}}=Q_{\textnormal{acccept}}\otimes \{\varepsilon\}$
-            \item un alphabet d'entrée $A$
-            \item une fonction de transition $\delta$, telle que $\forall a\in A$, $\delta(a)$ est un endomorphisme unitaire
-        \end{itemize}
-    \end{definition}
-\end{frame}
-
-\begin{frame}{Automate à pile quantique}
-    \framesubtitle{(Suite)}
-    Pour s'assurer du comportement LIFO de la pile, on ajoute les contraintes suivantes:
-    Soient $q_1, q_2\in Q$ des états de contrôle, et $\sigma_1, \sigma_2\in \Gamma$ des états de la pile; l'amplitude de la transition $(q_1, \sigma_1)$ to $(q_2, \sigma_2)$ est non-nulle seulement s'il existe $t\in T$ tel que:
-    \begin{equation*}
-        (\sigma_1t = \sigma_2) \lor (\sigma_1 = \sigma_2t) \lor (\sigma_1 = \sigma_2)
-    \end{equation*}
-    De plus, les amplitudes de transition peuvent dépendre uniquement de la dernière lettre de $\sigma_1$ et de $\sigma_2$.
-
-    Le langage reconnu par $\mathcal{A}$ est la fonction:
-    \begin{equation*}
-        f_{\mathcal{A}} : w \mapsto \|P_{\textnormal{accept}}\delta^\star(w)s_{\textnormal{init}}\|^2
-    \end{equation*}
-\end{frame}
-
-\begin{frame}{Théorème d'équivalence}
-    \begin{theorem}[Équivalence entre GQHC et APQ]
-        Un langage quantique est généré par une grammaire quantique hors-contexte si et seulement si il est reconnu par un automate à pile quantique.
-    \end{theorem}
-\end{frame}
+%\begin{frame}{Langage quantique régulier et propriétés}
+%    \begin{definition}[LQR]
+%        Un \emph{Langage Quantique Régulier} est un langage quantique reconnu par un automate quantique fini
+%    \end{definition}
+%
+%    \begin{theorem}[Clôture des LQR par produit]
+%        Soient $f, g$ des LQRs. Alors, le produit $fg$ est un LQR.
+%    \end{theorem}
+%
+%    \begin{theorem}[Clôture des LQR par combinaison linéaire]
+%        Soient $f_i$ des LQRs, et $c_i$ des constantes telles que $\sum_i c_i \leq 1$. Alors, $\sum_i c_if_i$ est un LQR.
+%    \end{theorem}
+%\end{frame}
+%
+%\begin{frame}{Langage quantique régulier et propriétés}
+%    \begin{theorem}[Lemme de pompage quantique]
+%        Si $f$ est un LQR, alors pour tout mot $w\in\Sigma^\star$ et tout $\varepsilon > 0$, il existe $k\in \mathbb{N}^\star$ tel que $\|f(uw^kv) - f(uv)\| < \varepsilon$ pour tout mots $u, v$. De plus, si l'automate de $f$ est de dimension $n$, alors il existe une constante $c$ (indépendante de $\varepsilon$) telle que $k < (c\varepsilon)^{-n}$.
+%    \end{theorem}
+%\end{frame}
+%
+%\begin{frame}{Grammaire quantique hors-contexte}
+%    \begin{definition}[Grammaire\footnote{\url{https://xkcd.com/1090/}} Quantique Hors-Contexte]
+%        Une \emph{Grammaire Quantique Hors-Contexte} $G=(V, T, I, P)$ de \emph{dimensionnalité} $n$ consiste en:
+%        \begin{itemize}[label=--, noitemsep]
+%            \item un alphabet $V$ de variables
+%            \item un alphabet $T$ de terminaux
+%            \item une variable initiale $I\in V$
+%            \item un ensemble fini de productions $P$ de la forme $\alpha\to \beta$, où $(\alpha, \beta)\in V\times (T\cup V)^\star$.
+%        \end{itemize}
+%        
+%    \end{definition}
+%\end{frame}
+%
+%\begin{frame}
+%    À chaque production de $P$ est associée un ensemble d'amplitudes complexes $\left(c_k(\alpha\to\beta)\right)_{1\leq k\leq n}$.
+%    
+%    On définit l'amplitude d'\emph{une} suite de productions:
+%    \begin{equation*}
+%        c_k(\alpha_1 \to \dots \to \alpha_m=\beta) := \prod_{i=1}^{m-1} c_k(\alpha_i\to\alpha_{i+1})
+%    \end{equation*}
+%
+%    Et l'amplitude d'une dérivation:
+%    \begin{equation*}
+%        c_k(\alpha\Rightarrow\beta) := \sum_{\alpha=\alpha_1 \to \dots \to \alpha_m=\beta} c_k(\alpha_1 \to \dots \to \alpha_m)
+%    \end{equation*}
+%
+%    Enfin, $G$ \emph{génère} le langage quantique $f$ définit par:
+%    \begin{equation*}
+%        f(w) = \sum_{k=1}^n \|c_k(I\Rightarrow w)\|^2
+%    \end{equation*}
+%\end{frame}
+%
+%\begin{frame}{Automate à pile quantique}
+%    \begin{definition}[QPDA]
+%        Un \emph{Automate à Pile Quantique} $\mathcal{A}=(H=Q\otimes \Sigma, \Gamma, Q_{\textnormal{acccept}}, s_{\textnormal{init}}, A, \delta)$ consiste en:
+%        \begin{itemize}[label=--, noitemsep]
+%            \item un espace de Hilbertt $H$ des configurations de $\mathcal{A}$, avec $H=Q\otimes \Sigma$ pour $Q$, $\Sigma$
+%            \item chaque vecteur de base de $\Sigma$ est un mot fini de \emph{l'alphabet de pile} $\Gamma$
+%            \item un état initial $s_{\textnormal{init}}$
+%            \item $Q_{\textnormal{acccept}} \subseteq Q$, tel que $H_{\textnormal{acccept}}=Q_{\textnormal{acccept}}\otimes \{\varepsilon\}$
+%            \item un alphabet d'entrée $A$
+%            \item une fonction de transition $\delta$, telle que $\forall a\in A$, $\delta(a)$ est un endomorphisme unitaire
+%        \end{itemize}
+%    \end{definition}
+%\end{frame}
+%
+%\begin{frame}{Automate à pile quantique}
+%    \framesubtitle{(Suite)}
+%    Pour s'assurer du comportement LIFO de la pile, on ajoute les contraintes suivantes:
+%    Soient $q_1, q_2\in Q$ des états de contrôle, et $\sigma_1, \sigma_2\in \Gamma$ des états de la pile; l'amplitude de la transition $(q_1, \sigma_1)$ to $(q_2, \sigma_2)$ est non-nulle seulement s'il existe $t\in T$ tel que:
+%    \begin{equation*}
+%        (\sigma_1t = \sigma_2) \lor (\sigma_1 = \sigma_2t) \lor (\sigma_1 = \sigma_2)
+%    \end{equation*}
+%    De plus, les amplitudes de transition peuvent dépendre uniquement de la dernière lettre de $\sigma_1$ et de $\sigma_2$.
+%
+%    Le langage reconnu par $\mathcal{A}$ est la fonction:
+%    \begin{equation*}
+%        f_{\mathcal{A}} : w \mapsto \|P_{\textnormal{accept}}\delta^\star(w)s_{\textnormal{init}}\|^2
+%    \end{equation*}
+%\end{frame}
+%
+%\begin{frame}{Théorème d'équivalence}
+%    \begin{theorem}[Équivalence entre GQHC et APQ]
+%        Un langage quantique est généré par une grammaire quantique hors-contexte si et seulement si il est reconnu par un automate à pile quantique.
+%    \end{theorem}
+%\end{frame}
 
 \begin{frame}{Machine de Turing quantique}
     \begin{definition}[MTQ] Une \emph{Machine de Turing Quantique} $M = (H, \Gamma, b, \Sigma, \delta, q_0, Q_{\textnormal{accept}})$ consiste en:
@@ -297,22 +294,22 @@
     \end{definition}
 \end{frame}
 
-\begin{frame}{Un problème Promise-BQP-complet}
-    \begin{definition}[Problème APPROX-QCIRCUIT-PROB]
-        \textsc{Entrée}: $\alpha, \beta$ tels que $0\leq\beta<\alpha\leq 1$, et la description d'un circuit quantique $C$ tel que:
-        \begin{itemize}[label=--, noitemsep]
-            \item le circuit prend en entrée $n$ qubits
-            \item le circuit contient $m$ portes
-            \item $m$ est polynomial en $n$
-            \item la probabilité $P$ de mesurer le premier qubit du circuit initialisé à $\ket{0}^{\otimes n}$, est telle que $P\geq\alpha$ ou $P\leq\beta$
-        \end{itemize}
-        \textsc{Sortie}: Déterminer si $P\geq\alpha$ ou $P\leq\beta$.
-    \end{definition}
-
-    \begin{theorem}[Complétude]
-        Tout problème BQP se réduit en APPROX-QCIRCUIT-PROB.
-    \end{theorem}
-\end{frame}
+%\begin{frame}{Un problème Promise-BQP-complet}
+%    \begin{definition}[Problème APPROX-QCIRCUIT-PROB]
+%        \textsc{Entrée}: $\alpha, \beta$ tels que $0\leq\beta<\alpha\leq 1$, et la description d'un circuit quantique $C$ tel que:
+%        \begin{itemize}[label=--, noitemsep]
+%            \item le circuit prend en entrée $n$ qubits
+%            \item le circuit contient $m$ portes
+%            \item $m$ est polynomial en $n$
+%            \item la probabilité $P$ de mesurer le premier qubit du circuit initialisé à $\ket{0}^{\otimes n}$, est telle que $P\geq\alpha$ ou $P\leq\beta$
+%        \end{itemize}
+%        \textsc{Sortie}: Déterminer si $P\geq\alpha$ ou $P\leq\beta$.
+%    \end{definition}
+%
+%    \begin{theorem}[Complétude]
+%        Tout problème BQP se réduit en APPROX-QCIRCUIT-PROB.
+%    \end{theorem}
+%\end{frame}
 
 \begin{frame}{Positionnement par rapport aux classes de complexité classiques}
     \begin{figure}[!ht]
